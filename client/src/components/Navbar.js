@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import {Link} from 'react-router-dom'
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from "@material-ui/icons/Search";
+
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -30,22 +32,20 @@ const Navbar = () => {
               onClick={handleMenu}
               className="absolute top-1 right-3 "
             />
-            <div className='relative'>
+            <div className="relative">
               <input
                 type="text"
                 name=""
                 className="bg-gray-300 rounded-xl pl-5 py-1 outline-none mb-5 "
-                id=""
-                placeholder='Search...'
+                placeholder="Search..."
               />
-              <SearchIcon className='absolute right-1 top-1 text-white'/>
+              <SearchIcon className="absolute right-1 top-1 text-white" />
             </div>
             <div className="flex flex-col justify-start items-center space-y-3">
-            <span>Home</span>
-            <span>Latetst Articles</span>
-            <span>Contact Me</span>
+              <span onClick={handleMenu}><Link to='/'>Home</Link></span>
+              <span>Latetst Articles</span>
+              <span>Contact Me</span>
             </div>
-            
           </div>
         </div>
       ) : (
