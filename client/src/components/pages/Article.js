@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { fetchData } from "../../actions/dataActions";
+
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, PinterestShareButton,PinterestIcon } from "react-share";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { fetchArticle } from "../../actions/articleActions";
 
 const Article = () => {
+
+  const article = useSelector(state => state.article)
+  const dispatch = useDispatch()
+  const articleId = useParams();
+  console.log(article);
+  
+  
+
+  useEffect(() => {
+    if (articleId && articleId!=''){
+      dispatch(fetchArticle(articleId.id))
+    }
+  }, [articleId])
+
   return (
     <div className="article">
       <div className="bg-yellow-200 py-3  flex flex-col items-center font-montserrat font-medium space-y-4">
         <span>------</span>
         <h1 className="text-center text-lg px-4 ">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          {article.articleTitle}
         </h1>
         <span>------</span>
         <p className="text-center italic font-normal px-3">
