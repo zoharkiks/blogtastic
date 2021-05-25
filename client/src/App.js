@@ -7,17 +7,18 @@ import Navbar from "./components/Navbar";
 import { Switch, Route } from "react-router-dom";
 import Article from "./components/pages/Article";
 // Redux
-import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "./actions/dataActions";
+import { useDispatch} from "react-redux";
+import { fetchData } from "./redux/actions/dataActions";
 
 function App() {
 
+// Getting all the articles
  const dispatch = useDispatch()
 
  useEffect(() => {
    
   dispatch(fetchData())
- }, [])
+ })
 
 
   

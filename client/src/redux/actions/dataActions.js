@@ -1,6 +1,11 @@
 import {ActionTypes} from "../actions/types";
 import axios from "axios";
 
+export const setArticlesStart=()=>{
+  return{
+    type:ActionTypes.SET_ARTICLES_START
+  }
+}
 export const setArticles =(articles)=>{
   return{
     type:ActionTypes.SET_ARTICLES,
@@ -10,13 +15,14 @@ export const setArticles =(articles)=>{
 
 
 
+
 export const fetchData = () => {
   return (dispatch) => {
+    dispatch(setArticlesStart())
        axios
-      .get(`http://localhost:1337/articles/`)
+      .get(`http://localhost:1337/articles?_sort=published_at:DESC`)
       .then((res) => {
         const data = res.data;
-console.log(data)
         dispatch(setArticles(data));
       })
       .catch((error) => {

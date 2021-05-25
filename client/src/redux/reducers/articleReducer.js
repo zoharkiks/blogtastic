@@ -23,7 +23,7 @@ const articleReducer = (state = initialState, { type, payload }) => {
       case ActionTypes.REMOVE_SELECTED_ARTICLE:
         return{
           ...state,
-          // article:[]
+          
         }
 
     default:

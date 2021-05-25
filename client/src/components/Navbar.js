@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import {Link} from 'react-router-dom'
+// Import Icons
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 import SearchIcon from "@material-ui/icons/Search";
 
 
 const Navbar = () => {
+  // Expanding on mobile
   const [open, setOpen] = useState(false);
 
   const handleMenu = () => {
@@ -14,7 +16,7 @@ const Navbar = () => {
 
   return (
     <div className="Navbar font-montserrat ">
-      <div className="bg-braintree flex justify-between items-center p-8 h-20 w-screen mb-3 ">
+      <div className="bg-braintree flex justify-between items-center p-8 h-20 w-screen ">
         <div>
           <h1 className="text-xl text-white font-medium">Zohar Williams</h1>
         </div>
