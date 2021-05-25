@@ -1,6 +1,13 @@
 import { ActionTypes } from "../actions/types";
 import axios from "axios";
 
+
+export const seletcedArticleStart =()=>{
+  return{
+    type:ActionTypes.SELECTED_ARTICLE_START
+  }
+}
+
 export const selectedArticle =(article)=>{
     return{
       type:ActionTypes.SELECTED_ARTICLE,
@@ -8,8 +15,15 @@ export const selectedArticle =(article)=>{
     }
   }
 
+export const removeSelectedArticle = ()=>{
+  return{
+    type: ActionTypes.REMOVE_SELECTED_ARTICLE
+  }
+}
+
   export const fetchArticle = (id)=>{
       return(dispatch)=>{
+        dispatch(seletcedArticleStart())
         axios
         .get(`http://localhost:1337/articles/${id}`)
         .then((res) => {

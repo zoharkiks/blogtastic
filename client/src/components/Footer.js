@@ -9,11 +9,11 @@ const Footer = () => {
     <div className="footer">
       <div className="bg-gray-500 flex flex-col items-center mt-2 pb-8 w-screen p-2 space-y-5">
         <div className=" flex justify-center items-center mt-4 space-x-5">
-          <a href="https://github.com/zoharkiks/" target="_blank">
+          <a href="https://github.com/zoharkiks/" target="_blank" rel='noreferrer'>
             <GitHubIcon className="text-white" />
           </a>
 
-          <a href="https://www.linkedin.com/in/zoharwilliams/" target="_blank">
+          <a href="https://www.linkedin.com/in/zoharwilliams/" target="_blank" rel='noreferrer'>
             <LinkedInIcon className="text-white" />
           </a>
 
@@ -21,7 +21,7 @@ const Footer = () => {
             <EmailIcon className="text-white" />
           </a>
 
-          <a href="https://www.instagram.com/zoharkiks/?hl=en" target="_blank">
+          <a href="https://www.instagram.com/zoharkiks/?hl=en" target="_blank" rel='noreferrer'>
             <InstagramIcon className="text-white" />
           </a>
         </div>

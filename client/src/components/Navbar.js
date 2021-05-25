@@ -10,7 +10,6 @@ const Navbar = () => {
 
   const handleMenu = () => {
     setOpen(!open);
-    console.log(open);
   };
 
   return (
