@@ -14,9 +14,9 @@ import { useParams, useHistory } from "react-router";
 import {
   fetchArticle,
   removeSelectedArticle,
-} from "../../redux/actions/articleActions";
+} from "../redux/actions/articleActions";
 // Import loader
-import MyLoader from "../MyLoader";
+import MyLoader from "../components/MyLoader";
 
 const Article = () => {
   // Selected Article State
@@ -41,14 +41,14 @@ const Article = () => {
       {loading ? (
         <MyLoader />
       ) : (
-        <div className="bg-yellow-200 py-3  flex flex-col items-center font-montserrat font-medium space-y-4">
+        <div className="bg-taupe py-3  flex flex-col items-center font-montserrat font-medium space-y-4">
           <div
             className="flex flex-row justify-flex-end w-full"
             onClick={() => history.goBack()}
           >
             Go back
           </div>
-          <span>------</span>
+          <span>------</span> 
           <h1 className="text-center text-lg px-4 ">{articleTitle}</h1>
           <span>------</span>
           <p className="text-center italic font-normal px-3">

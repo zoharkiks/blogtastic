@@ -8,7 +8,7 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 const Footer = () => {
   return (
     <div className="footer">
-      <div className="bg-gray-500 flex flex-col items-center pb-8 w-screen p-2 space-y-5">
+      <div className="bg-braintree flex flex-col items-center pb-8 w-screen p-2 space-y-5">
 
         {/* Icons */}
         <div className=" flex justify-center items-center mt-4 space-x-5">

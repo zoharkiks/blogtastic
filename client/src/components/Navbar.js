@@ -44,7 +44,7 @@ const Navbar = () => {
             </div>
             <div className="flex flex-col justify-start items-center space-y-3">
               <span onClick={handleMenu}><Link to='/'>Home</Link></span>
-              <span>Latetst Articles</span>
+              <span onClick={handleMenu}><Link to='/allArticles/'> All Articles</Link></span>
               <span>Contact Me</span>
             </div>
           </div>

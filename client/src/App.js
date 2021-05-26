@@ -1,41 +1,45 @@
 import "./App.css";
 import { useEffect } from "react";
+// Components and Pages
+import Article from "./pages/Article";
 import Box from "./components/Box";
 import Footer from "./components/Footer";
 import Modal from "./components/Modal";
 import Navbar from "./components/Navbar";
-import { Switch, Route } from "react-router-dom";
-import Article from "./components/pages/Article";
+import AllArticles from "./pages/AllArticles";
+// Routing
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import ScrollToTop from "./helpers/ScrollToTop";
 // Redux
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchData } from "./redux/actions/dataActions";
 
 function App() {
+  // Getting all the articles
+  const dispatch = useDispatch();
 
-// Getting all the articles
- const dispatch = useDispatch()
-
- useEffect(() => {
-   
-  dispatch(fetchData())
- })
-
-
-  
+  useEffect(() => {
+    dispatch(fetchData());
+  });
 
   return (
     <div className="App">
-      <Navbar />
-      <Switch>
-        <Route path="/articles/:id">
-          <Article />
-        </Route>
-        <Route path="/" exact>
-          <Modal />
-          <Box />
-        </Route>
-      </Switch>
-      <Footer />
+      <BrowserRouter>
+        <Navbar />
+        <ScrollToTop/>
+          <Switch>
+            <Route path="/articles/:id" component={Article} />
+
+            <Route path="/allArticles/" component={AllArticles} />
+
+            <Route path="/" exact >
+              <Modal/>
+              <Box/>
+              </Route>
+          </Switch>
+        
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }
