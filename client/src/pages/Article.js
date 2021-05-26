@@ -17,6 +17,8 @@ import {
 } from "../redux/actions/articleActions";
 // Import loader
 import MyLoader from "../components/MyLoader";
+// Helper functions
+import { dateParser } from "../helpers/date.js";
 
 const Article = () => {
   // Selected Article State
@@ -25,8 +27,15 @@ const Article = () => {
   const history = useHistory();
 
   const article = useSelector((state) => state.article);
-  const { articleTitle, articleContent, coverImage, published_at, loading, shortDesc, author,id } =
-    article;
+  const {
+    articleTitle,
+    articleContent,
+    coverImage,
+    published_at,
+    loading,
+    shortDesc,
+    author,
+  } = article;
 
   useEffect(() => {
     if (articleId && articleId !== "") {
@@ -41,43 +50,46 @@ const Article = () => {
       {loading ? (
         <MyLoader />
       ) : (
-        <div className="bg-taupe py-3  flex flex-col items-center font-montserrat font-medium space-y-4">
-          <div
-            className="flex flex-row justify-flex-end w-full"
-            onClick={() => history.goBack()}
-          >
-            Go back
+        <div className="bg-taupe p-3 flex flex-col items-center font-montserrat font-medium space-y-4">
+          <div className="flex space-x-6">
+            <h2 className="">Previous</h2>
+            <h2 onClick={() => history.goBack()} className="">
+              Go Back
+            </h2>
+            <h2 className="">Next </h2>
           </div>
-          <span>------</span> 
-          <h1 className="text-center text-lg px-4 ">{articleTitle}</h1>
-          <span>------</span>
-          <p className="text-center italic font-normal px-3">
-           {shortDesc}
-          </p>
-          <span className="text-center font-light text-sm ">
-            by: {author}
-          </span>
-          <span className="text-center font-light text-sm">{published_at}</span>
+          <div className="bg-white flex flex-col items-center space-y-6 p-3 rounded-xl">
+            <span>------</span>
+            <h1 className="text-center text-2xl px-4 ">{articleTitle}</h1>
+            <span>------</span>
+            <p className="text-center italic font-normal px-3">{shortDesc}</p>
+            <span className="text-center font-light text-sm ">
+              by: {author}
+            </span>
+            <span className="text-center font-light text-sm">
+              {dateParser(`${published_at}`)}
+            </span>
 
-          {/* Share Icons */}
-          <div className=" flex justify-evenly w-1/2 ">
-            <FacebookShareButton
-              url="https://www.google.com/"
-              quote="Test"
-              hashtag="test"
-            >
-              <FacebookIcon size="32" round={true} />
-            </FacebookShareButton>
+            {/* Share Icons */}
+            <div className=" flex justify-evenly w-1/2 ">
+              <FacebookShareButton
+                url="https://www.google.com/"
+                quote="Test"
+                hashtag="test"
+              >
+                <FacebookIcon size="32" round={true} />
+              </FacebookShareButton>
 
-            <TwitterShareButton>
-              <TwitterIcon size="32" round={true} />
-            </TwitterShareButton>
+              <TwitterShareButton>
+                <TwitterIcon size="32" round={true} />
+              </TwitterShareButton>
 
-            <PinterestShareButton>
-              <PinterestIcon size="32" round={true} />
-            </PinterestShareButton>
+              <PinterestShareButton>
+                <PinterestIcon size="32" round={true} />
+              </PinterestShareButton>
+            </div>
+            {/* -------------- */}
           </div>
-          {/* -------------- */}
 
           <div className="bg-green-300 h-56 ">
             <img
@@ -86,7 +98,7 @@ const Article = () => {
               alt=""
             />
           </div>
-          <p className="text-left font-normal text-base px-2">
+          <p className="text-left font-normal text-lg leading-relaxed px-2 whitespace-pre-line">
             {articleContent}
           </p>
         </div>
