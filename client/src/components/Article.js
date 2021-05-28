@@ -2,6 +2,7 @@ import {React} from 'react';
 import { Link } from 'react-router-dom';
 import {dateParser} from '../helpers/date.js'
 import Avatar from '@material-ui/core/Avatar'
+import '../App.css'
 
 const Article = ({title,date,id,shortDesc, author,category, coverImg}) => {
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // Import Share Icons
 import {
   FacebookShareButton,
@@ -10,7 +10,7 @@ import {
 } from "react-share";
 // Redux and Router
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router";
+import { useParams} from "react-router";
 import {
   fetchArticle,
   removeSelectedArticle,
@@ -24,9 +24,12 @@ const Article = () => {
   // Selected Article State
   const dispatch = useDispatch();
   const articleId = useParams();
-  const history = useHistory();
+  
 
   const article = useSelector((state) => state.article);
+  
+
+
   const {
     articleTitle,
     articleContent,
@@ -37,27 +40,24 @@ const Article = () => {
     author,
   } = article;
 
+
+
   useEffect(() => {
     if (articleId && articleId !== "") {
       dispatch(fetchArticle(articleId.id));
     }
 
     dispatch(removeSelectedArticle());
+
   }, [articleId]);
 
   return (
-    <div className="article">
+    <div className="article bg-taupe ">
       {loading ? (
-        <MyLoader />
+        <div className="p-4"><MyLoader /></div>
+        
       ) : (
         <div className="bg-taupe p-3 flex flex-col items-center font-montserrat font-medium space-y-4">
-          <div className="flex space-x-6">
-            <h2 className="">Previous</h2>
-            <h2 onClick={() => history.goBack()} className="">
-              Go Back
-            </h2>
-            <h2 className="">Next </h2>
-          </div>
           <div className="bg-white flex flex-col items-center space-y-6 p-3 rounded-xl">
             <span>------</span>
             <h1 className="text-center text-2xl px-4 ">{articleTitle}</h1>
@@ -91,7 +91,7 @@ const Article = () => {
             {/* -------------- */}
           </div>
 
-          <div className="bg-green-300 h-56 ">
+          <div className=" h-56 ">
             <img
               className=" w-full h-full object-cover"
               src={`http://localhost:1337${coverImage?.url}`}
