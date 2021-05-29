@@ -1,6 +1,6 @@
 import moment from 'moment'
 
 export const dateParser = (date)=>{
-   return moment(date).format('ll')
+return moment(new Date(date)).format('lll')
 }
 

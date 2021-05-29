@@ -26,7 +26,7 @@ export const fetchData = () => {
         dispatch(setArticles(data));
       })
       .catch((error) => {
-        const errMsg = error.message;
+        return error
         
       });
   };

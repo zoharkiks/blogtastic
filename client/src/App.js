@@ -13,7 +13,6 @@ import ScrollToTop from "./helpers/ScrollToTop";
 // Redux
 import { useDispatch } from "react-redux";
 import { fetchData } from "./redux/actions/dataActions";
-import SearchResults from "./pages/SearchResults";
 
 function App() {
   // Getting all the articles
@@ -32,8 +31,6 @@ function App() {
             <Route path="/articles/:id" component={Article} />
 
             <Route path="/allArticles/" component={AllArticles} />
-
-            <Route path='/searchResults' component={SearchResults}/>
 
             <Route path="/" exact >
               <Modal/>

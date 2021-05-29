@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from "react";
-// Import Share Icons
+import React, { useEffect} from "react";
+// Import Icons
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import EmailIcon from '@material-ui/icons/Email';
+import PinterestIcon from '@material-ui/icons/Pinterest';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+
+// Import Share
 import {
   FacebookShareButton,
-  FacebookIcon,
   TwitterShareButton,
-  TwitterIcon,
   PinterestShareButton,
-  PinterestIcon,
+  EmailShareButton,
+  WhatsappShareButton
+
 } from "react-share";
 // Redux and Router
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +35,7 @@ const Article = () => {
 
   const article = useSelector((state) => state.article);
   
+  console.log(article.categories);
 
 
   const {
@@ -38,6 +46,7 @@ const Article = () => {
     loading,
     shortDesc,
     author,
+categories
   } = article;
 
 
@@ -57,48 +66,56 @@ const Article = () => {
         <div className="p-4"><MyLoader /></div>
         
       ) : (
-        <div className="bg-taupe p-3 flex flex-col items-center font-montserrat font-medium space-y-4">
-          <div className="bg-white flex flex-col items-center space-y-6 p-3 rounded-xl">
-            <span>------</span>
-            <h1 className="text-center text-2xl px-4 ">{articleTitle}</h1>
-            <span>------</span>
-            <p className="text-center italic font-normal px-3">{shortDesc}</p>
-            <span className="text-center font-light text-sm ">
+        <div className="bg-taupe p-3 py-10 flex flex-col items-center font-montserrat font-medium space-y-8 ">
+          <div className="bg-white flex w-full flex-col items-center space-y-6 p-3 rounded-xl">
+            
+            <h1 className="text-center text-2xl px-4 sm:text-3xl sm:px-5">{articleTitle}</h1>
+            <span className='bg-green-300 rounded-2xl p-1 px-3 sm:text-xl '>{categories[0].categoryName}</span>
+            <p className="text-center italic font-normal px-3 sm:text-2xl">{shortDesc}</p>
+            <span className="text-center font-light text-sm sm:text-xl">
               by: {author}
             </span>
-            <span className="text-center font-light text-sm">
+            <span className="text-center font-light text-sm sm:text-xl">
               {dateParser(`${published_at}`)}
             </span>
 
             {/* Share Icons */}
-            <div className=" flex justify-evenly w-1/2 ">
+            <div className=" flex justify-evenly space-x-4">
               <FacebookShareButton
-                url="https://www.google.com/"
-                quote="Test"
+                url={`https://localhost:1337alllArticles/${articleId}`}
+                quote={`Just found out this amazing article on Blogtastic`}
                 hashtag="test"
               >
-                <FacebookIcon size="32" round={true} />
+                <FacebookIcon className="sm:!text-4xl"/>
               </FacebookShareButton>
 
-              <TwitterShareButton>
-                <TwitterIcon size="32" round={true} />
+              <TwitterShareButton url={`https://localhost:1337alllArticles/${articleId}`} title={articleTitle}>
+                <TwitterIcon className="sm:!text-4xl"/>
               </TwitterShareButton>
 
-              <PinterestShareButton>
-                <PinterestIcon size="32" round={true} />
+              <PinterestShareButton url={`https://localhost:1337alllArticles/${articleId}`} description={shortDesc} media={`http://localhost:1337${coverImage?.url}`}>
+                <PinterestIcon className="sm:!text-4xl" />
               </PinterestShareButton>
+
+              <EmailShareButton url={`https://localhost:1337alllArticles/${articleId}`} subject={articleTitle} body={`Just found out this amazing article on Blogtastic \n \n ${articleContent}`}>
+                <EmailIcon className="sm:!text-4xl"/>
+              </EmailShareButton>
+
+              <WhatsappShareButton url={`https://localhost:1337alllArticles/${articleId}`} title={articleTitle} >
+                <WhatsAppIcon className="sm:!text-4xl"/>
+              </WhatsappShareButton>
             </div>
             {/* -------------- */}
           </div>
 
-          <div className=" h-56 ">
+          <div className="">
             <img
-              className=" w-full h-full object-cover"
+              className=" object-cover"
               src={`http://localhost:1337${coverImage?.url}`}
               alt=""
             />
           </div>
-          <p className="text-left font-normal text-lg leading-relaxed px-2 whitespace-pre-line">
+          <p className="text-left font-normal text-lg leading-relaxed px-2 whitespace-pre-line sm:text-2xl  ">
             {articleContent}
           </p>
         </div>

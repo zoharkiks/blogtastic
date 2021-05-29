@@ -7,15 +7,14 @@ const Box = () => {
   const articles = useSelector((state) => state.allArticles.articles);
   const loading = useSelector((state) => state.allArticles.loading);
 
-  console.log(articles);
 
   return (
     <div className="box font-montserrat">
       <div className="bg-taupe px-4 p-8 flex flex-col justify-center items-center space-y-8">
-        <h1 className="text-2xl p-4 ">EDITOR'S CHOICE</h1>
-        <div className="space-y-10 flex flex-col items-center justify-center">
+        <h1 className="text-2xl p-4 sm:text-3xl ">EDITOR'S CHOICE</h1>
+        <div className="space-y-10 flex flex-col  justify-center">
           {loading ? (
-            <MyLoader />
+            <MyLoader className='w-screen' />
           ) : (
             articles
               .filter((article, idx) => idx < 4)
@@ -35,11 +34,11 @@ const Box = () => {
           )}
         </div>
 
-        <Link to={"/allArticles"}>
-          <span className="bg-white p-4 rounded-full font-medium text-xl my-5">
-            Show More Articles
+        
+          <span className="bg-white p-3 rounded-full font-medium text-xl my-5 sm:text-2xl sm:p-4">
+          <Link to={"/allArticles"}> All Articles</Link>
           </span>
-        </Link>
+        
       </div>
     </div>
   );

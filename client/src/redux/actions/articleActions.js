@@ -31,8 +31,7 @@ export const removeSelectedArticle = ()=>{
           dispatch(selectedArticle(data));
         })
         .catch((error) => {
-          const errMsg = error.message;
-          
+         return error
         });
       }
   }

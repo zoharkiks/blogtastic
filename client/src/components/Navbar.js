@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import Article from "./Article";
+import { Link } from "react-router-dom";
 // Import Icons
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
@@ -16,8 +15,6 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const articleId = useParams();
-
   const handleMenu = () => {
     setOpen(!open);
     setSearchTerm("");
@@ -27,7 +24,9 @@ const Navbar = () => {
     <div className="Navbar font-montserrat ">
       <div className="bg-braintree flex justify-between items-center p-8 h-20">
         <div>
-          <h1 className="text-xl text-white font-medium">Blogtastic</h1>
+          <h1 className="text-xl text-white font-medium sm:text-2xl">
+            Blogtastic
+          </h1>
         </div>
         <MenuIcon
           onClick={handleMenu}
@@ -37,24 +36,22 @@ const Navbar = () => {
       </div>
       {open ? (
         <div className="bg-taupe h-screen w-full p-5  fixed top-0 z-10 ">
-          <div className="bg-white w-full flex  flex-col justify-start items-center pt-10 p-3 relative ">
+          <div className="bg-white w-full flex min-h-2/3 flex-col justify-start items-center pt-10 p-3 relative ">
             <CloseIcon
               onClick={handleMenu}
               className="absolute top-1 right-3 "
             />
-            <div className="relative">
-              <form action="">
-                <input
-                  type="text"
-                  name=""
-                  onChange={(e) => {
-                    setSearchTerm(e.target.value);
-                  }}
-                  className="bg-gray-300 rounded-xl pl-5 py-1 outline-none mb-5 "
-                  placeholder="Search..."
-                />
-                <SearchIcon className="absolute right-1 top-1 text-white" />
-              </form>
+            <div className="relative ">
+              <input
+                type="text"
+                name=""
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                }}
+                className="bg-gray-300 rounded-xl pl-5 py-1 outline-none mb-5 sm:py-3 sm:px-8 sm:rounded-3xl sm:text-lg"
+                placeholder="Search..."
+              />
+              <SearchIcon className="absolute right-1 top-1 text-white sm:top-4 sm:right-2" />
             </div>
 
             <div className="flex flex-col justify-start items-center  space-y-3">
@@ -63,39 +60,39 @@ const Navbar = () => {
                   .filter((article) => {
                     const title = article.articleTitle.toLowerCase();
                     const term = searchTerm.toLowerCase();
-                    if (searchTerm == "") {
+                    if (searchTerm === "") {
                       return null;
                     } else if (title.includes(term)) {
                       return article;
                     }
+                    return false;
                   })
                   .map((article) => {
                     return (
-                      <>
+                      <div key={article._id}>
                         <Link to={`/articles/${article._id}`}>
                           <div
-                            className="bg-illusion p-4 text-white rounded-full text-xl flex flex-col justify-center items-center text-center"
-                            key={article._id}
+                            className="bg-illusion p-4 text-white rounded-full text-xl flex flex-col justify-center items-center text-center sm:text-2xl"
                             onClick={handleMenu}
                           >
                             <h1>{article.articleTitle}</h1>
-                            <span className="text-center font-light text-sm ">
+                            <span className="text-center font-light text-sm sm:text-lg ">
                               by: {article.author}
                             </span>
                           </div>
                         </Link>
-                      </>
+                      </div>
                     );
                   })}
               </div>
 
-              <span onClick={handleMenu}>
+              <span className="sm:text-2xl" onClick={handleMenu}>
                 <Link to="/">Home</Link>
               </span>
-              <span onClick={handleMenu}>
+              <span className="sm:text-2xl" onClick={handleMenu}>
                 <Link to="/allArticles/"> All Articles</Link>
               </span>
-              <span>About Me</span>
+              <span className="sm:text-2xl">About Me</span>
             </div>
           </div>
         </div>

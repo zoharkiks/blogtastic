@@ -17,7 +17,7 @@ const Footer = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <GitHubIcon className="text-white" />
+            <GitHubIcon className="text-white sm:!text-4xl"  />
           </a>
 
           <a
@@ -25,11 +25,11 @@ const Footer = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <LinkedInIcon className="text-white" />
+            <LinkedInIcon className="text-white sm:!text-4xl" />
           </a>
 
           <a href="mailto:zoharkiks">
-            <EmailIcon className="text-white" />
+            <EmailIcon className="text-white sm:!text-4xl" />
           </a>
 
           <a
@@ -37,27 +37,27 @@ const Footer = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <InstagramIcon className="text-white" />
+            <InstagramIcon className="text-white sm:!text-4xl" />
           </a>
         </div>
         {/* ------------------------- */}
 
-        <span className="text-white mt-3">Sign Up for Awesome Newsletters</span>
+        <span className="text-white mt-3 sm:text-xl">Sign Up for Awesome Newsletters</span>
         <form action="" className="relative mt-3">
           <input
             type="text"
             name=""
-            className="bg-gray-300 rounded-xl pl-4 py-1 outline-none mb-5 "
+            className="bg-gray-300 rounded-xl pl-4 py-1 outline-none mb-5 sm:px-8 sm:py-2  "
             placeholder="Your Email"
           />
           <button
             type="submit"
-            className="text-white focus:outline-none text-sm focus:ring focus:border-blue-300 absolute h-8 right-0 p-1 rounded-r-xl bg-gray-400"
+            className="text-white focus:outline-none text-sm focus:ring focus:border-blue-300 absolute h-8 right-0 p-1 px-2 rounded-r-xl bg-gray-400 sm:h-10"
           >
             Sign Up
           </button>
-        </form>
-      </div>
+          </form>
+        </div>
     </div>
   );
 };
