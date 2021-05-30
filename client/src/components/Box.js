@@ -14,12 +14,12 @@ const Box = () => {
     <div className="box font-montserrat">
       <div className="bg-taupe px-4 p-8 flex flex-col justify-center items-center space-y-8">
         <h1 className="text-2xl p-4 sm:text-3xl ">EDITOR'S CHOICE</h1>
-        <div className=" grid gap-y-8 md:grid-cols-2 md:grid-rows-2 md:gap-y-10">
+        <div className=" grid gap-y-8 md:grid-cols-2 md:grid-rows-2 md:gap-y-10 xl:grid-cols-3 xl:grid-rows-1">
           {loading ? (
             <MyLoader className='w-screen' />
           ) : (
             articles
-              .filter((article, idx) => idx < 4)
+              .filter((article, idx) => idx < 3)
               .map((article) => (
                 <Article
                   category={article.categories[0].categoryName}

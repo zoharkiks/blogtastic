@@ -49,10 +49,10 @@ const Navbar = () => {
           <SearchIcon className="absolute right-1 top-1 text-white sm:top-2 sm:right-2" />
         </div>
 
-        <div className="bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 rounded-xl border-gray-200 absolute w-1/2 top-[4rem] left-[9rem]  hidden lg:inline z-10">
+        <div className="bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 rounded-xl border-gray-200 absolute w-1/2 top-[4rem] left-[9rem]  hidden lg:inline z-10 ">
             
-          <div className="flex flex-col justify-center items-center space-y-5 relative ">
-      {searchTerm && searchTerm.length >=2 ? <span className="text-2xl mt-2">Your search results</span> : ''}
+          <div className="flex flex-col justify-center items-center space-y-5 relative xl:space-y-2 ">
+      {searchTerm && searchTerm.length >=2 ? <span className="text-2xl mt-2 text-left w-full ml-20 text-white">Your search results:</span> : ''}
             {articles
               .filter((article) => {
                 const title = article.articleTitle.toLowerCase();

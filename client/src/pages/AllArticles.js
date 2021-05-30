@@ -21,7 +21,7 @@ const AllArticles = () => {
       <div className="bg-taupe font-montserrat ">
         <div className="flex flex-col items-center px-8">
           <h2 className='text-2xl  my-8 sm:text-3xl' >All Articles</h2>
-          <div className="grid gap-7 md:grid-cols-2">
+          <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-1">
             {loading ? (<MyLoader/>) : (articles.slice(0, visible).map((article) => (
               <Article
                 category={article.categories[0].categoryName}
