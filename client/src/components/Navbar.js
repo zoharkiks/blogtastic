@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 // Import Icons
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
@@ -10,6 +10,14 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
   // Access State
   const articles = useSelector((state) => state.allArticles.articles);
+
+  // Params
+  const clear = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
+    setSearchTerm("");
+  };
 
   // Expanding on mobile
   const [open, setOpen] = useState(false);
@@ -22,20 +30,74 @@ const Navbar = () => {
 
   return (
     <div className="Navbar font-montserrat ">
-      <div className="bg-braintree flex justify-between items-center p-8 h-20">
-        <div>
-          <h1 className="text-xl text-white font-medium sm:text-2xl">
-            Blogtastic
-          </h1>
+      <div className="bg-braintree flex justify-between items-center px-4 h-20 lg:px-7">
+        <h1 className="text-xl text-white font-medium sm:text-2xl ">
+          {" "}
+          <Link to="/">Blogtastic</Link>
+        </h1>
+
+        <div className="relative hidden lg:flex">
+          <input
+            type="text"
+            name=""
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+            className="bg-gray-300 rounded-3xl pl-5 py-2 px-8 outline-none "
+            placeholder="Search..."
+          />
+          <SearchIcon className="absolute right-1 top-1 text-white sm:top-2 sm:right-2" />
         </div>
-        <MenuIcon
-          onClick={handleMenu}
-          fontSize="large"
-          className=" text-white cursor-pointer "
-        />
+
+        <div className="bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 rounded-xl border-gray-200 absolute w-1/2 top-[4rem] left-[9rem]  hidden lg:inline z-10">
+            
+          <div className="flex flex-col justify-center items-center space-y-5 relative ">
+      {searchTerm && searchTerm.length >=2 ? <span className="text-2xl mt-2">Your search results</span> : ''}
+            {articles
+              .filter((article) => {
+                const title = article.articleTitle.toLowerCase();
+                const term = searchTerm.toLowerCase();
+                if (searchTerm === "") {
+                  return null;
+                } else if (title.includes(term) && term.length >= 2) {
+                  return article;
+                }
+                return false;
+              })
+              .map((article) => {
+                return (
+                  <div key={article._id} className="py-4">
+                    <Link to={`/articles/${article._id}`} onClick={clear}>
+                      <div className="bg-illusion p-4 text-white rounded-full text-xl flex flex-col justify-center items-center text-center sm:text-2xl">
+                        <h1>{article.articleTitle}</h1>
+                        <span className="text-center font-light text-sm sm:text-lg ">
+                          by: {article.author}
+                        </span>
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+
+        <span className="text-xl text-white hidden lg:inline">
+          <Link to="/allArticles/"> All Articles</Link>
+        </span>
+        <span className="text-xl text-white hidden lg:inline">About Me</span>
+
+        {/* -----------------------MOBILE NAVIGATION-------------------- */}
+
+        <div className="lg:hidden">
+          <MenuIcon
+            onClick={handleMenu}
+            fontSize="large"
+            className=" text-white cursor-pointer "
+          />
+        </div>
       </div>
       {open ? (
-        <div className="bg-taupe h-screen w-full p-5  fixed top-0 z-10 ">
+        <div className="bg-taupe h-screen w-full p-5  fixed top-0 z-10 lg:hidden ">
           <div className="bg-white w-full flex min-h-2/3 flex-col justify-start items-center pt-10 p-3 relative ">
             <CloseIcon
               onClick={handleMenu}
@@ -62,7 +124,7 @@ const Navbar = () => {
                     const term = searchTerm.toLowerCase();
                     if (searchTerm === "") {
                       return null;
-                    } else if (title.includes(term)) {
+                    } else if (title.includes(term) && term.length >= 2) {
                       return article;
                     }
                     return false;

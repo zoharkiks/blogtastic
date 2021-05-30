@@ -8,7 +8,7 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 const Footer = () => {
   return (
     <div className="footer">
-      <div className="bg-braintree flex flex-col items-center pb-8 p-2 space-y-5">
+      <div className="bg-braintree flex flex-col items-center pb-8 p-2 space-y-5 lg:flex-row lg:justify-evenly lg:items-center">
 
         {/* Icons */}
         <div className=" flex justify-center items-center mt-4 space-x-5">
@@ -47,7 +47,7 @@ const Footer = () => {
           <input
             type="text"
             name=""
-            className="bg-gray-300 rounded-xl pl-4 py-1 outline-none mb-5 sm:px-8 sm:py-2  "
+            className="bg-gray-300 rounded-xl pl-4 py-1 outline-none sm:px-8 sm:py-2 lg:mb-0  "
             placeholder="Your Email"
           />
           <button

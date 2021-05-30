@@ -8,11 +8,13 @@ const Box = () => {
   const loading = useSelector((state) => state.allArticles.loading);
 
 
+
+  
   return (
     <div className="box font-montserrat">
       <div className="bg-taupe px-4 p-8 flex flex-col justify-center items-center space-y-8">
         <h1 className="text-2xl p-4 sm:text-3xl ">EDITOR'S CHOICE</h1>
-        <div className="space-y-10 flex flex-col  justify-center">
+        <div className=" grid gap-y-8 md:grid-cols-2 md:grid-rows-2 md:gap-y-10">
           {loading ? (
             <MyLoader className='w-screen' />
           ) : (
@@ -35,7 +37,7 @@ const Box = () => {
         </div>
 
         
-          <span className="bg-white p-3 rounded-full font-medium text-xl my-5 sm:text-2xl sm:p-4">
+          <span className="bg-white p-3 px-6 rounded-full font-medium text-xl my-5 sm:text-2xl sm:px-8">
           <Link to={"/allArticles"}> All Articles</Link>
           </span>
         

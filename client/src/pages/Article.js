@@ -35,7 +35,6 @@ const Article = () => {
 
   const article = useSelector((state) => state.article);
   
-  console.log(article.categories);
 
 
   const {
@@ -48,6 +47,8 @@ const Article = () => {
     author,
 categories
   } = article;
+
+  
 
 
 
@@ -66,11 +67,11 @@ categories
         <div className="p-4"><MyLoader /></div>
         
       ) : (
-        <div className="bg-taupe p-3 py-10 flex flex-col items-center font-montserrat font-medium space-y-8 ">
-          <div className="bg-white flex w-full flex-col items-center space-y-6 p-3 rounded-xl">
+        <div className="bg-taupe p-3 py-10 px-8 flex flex-col items-center font-montserrat font-medium space-y-8 ">
+          <div className="bg-white flex  flex-col items-center space-y-6 p-3 rounded-xl py-10">
             
             <h1 className="text-center text-2xl px-4 sm:text-3xl sm:px-5">{articleTitle}</h1>
-            <span className='bg-green-300 rounded-2xl p-1 px-3 sm:text-xl '>{categories[0].categoryName}</span>
+            <span className='bg-green-300 rounded-2xl p-1 px-3 font-light sm:text-xl '>{categories ? categories[0].categoryName : null }</span>
             <p className="text-center italic font-normal px-3 sm:text-2xl">{shortDesc}</p>
             <span className="text-center font-light text-sm sm:text-xl">
               by: {author}
@@ -110,12 +111,12 @@ categories
 
           <div className="">
             <img
-              className=" object-cover"
+              className="object-contain max-h-[25rem] w-full"
               src={`http://localhost:1337${coverImage?.url}`}
               alt=""
             />
           </div>
-          <p className="text-left font-normal text-lg leading-relaxed px-2 whitespace-pre-line sm:text-2xl  ">
+          <p className="text-left font-normal text-lg leading-10 px-2 whitespace-pre-line sm:text-2xl sm:leading-[3rem]  ">
             {articleContent}
           </p>
         </div>

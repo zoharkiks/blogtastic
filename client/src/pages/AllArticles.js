@@ -19,9 +19,9 @@ const AllArticles = () => {
   return (
     <div className="allArticles">
       <div className="bg-taupe font-montserrat ">
-        <div className="flex flex-col items-center">
-          <h2 className='text-2xl p-4 sm:text-3xl' >All Articles</h2>
-          <div className="grid gap-7 px-2">
+        <div className="flex flex-col items-center px-8">
+          <h2 className='text-2xl  my-8 sm:text-3xl' >All Articles</h2>
+          <div className="grid gap-7 md:grid-cols-2">
             {loading ? (<MyLoader/>) : (articles.slice(0, visible).map((article) => (
               <Article
                 category={article.categories[0].categoryName}
@@ -37,7 +37,7 @@ const AllArticles = () => {
             ))) }
             
           </div>
-          <span className="bg-white p-4 rounded-xl font-medium text-xl my-5 sm:text-2xl sm:p-4" onClick={showMore}>
+          <span className="bg-white p-4 rounded-xl font-medium text-xl my-8 sm:text-2xl sm:p-4" onClick={showMore}>
           Show More Articles
         </span>
         </div>
