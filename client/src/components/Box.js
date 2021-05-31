@@ -37,7 +37,7 @@ const Box = () => {
         </div>
 
         
-          <span className="bg-white p-3 px-6 rounded-full font-medium text-xl my-5 sm:text-2xl sm:px-8">
+          <span className="bg-white cursor-pointer p-3 px-6 rounded-full font-medium text-xl my-5 sm:text-2xl sm:px-8">
           <Link to={"/allArticles"}> All Articles</Link>
           </span>
         

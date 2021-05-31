@@ -71,7 +71,7 @@ categories
           <div className="bg-white flex  flex-col items-center space-y-6 p-3 rounded-xl py-10">
             
             <h1 className="text-center text-2xl px-4 sm:text-3xl sm:px-5">{articleTitle}</h1>
-            <span className='bg-green-300 rounded-2xl p-1 px-3 font-light sm:text-xl '>{categories ? categories[0].categoryName : null }</span>
+            <span className='bg-green-300 rounded-2xl p-1 px-3 font-light sm:text-xl '># {categories ? categories[0].categoryName : null }</span>
             <p className="text-center italic font-normal px-3 sm:text-2xl">{shortDesc}</p>
             <span className="text-center font-light text-sm sm:text-xl">
               by: {author}
@@ -116,7 +116,7 @@ categories
               alt=""
             />
           </div>
-          <p className="text-left font-normal text-lg leading-10 px-2 whitespace-pre-line sm:text-2xl sm:leading-[3rem]  ">
+          <p className="text-left font-normal text-lg leading-8 px-15 whitespace-pre-line sm:text-2xl sm:leading-[3rem] lg:px-16   ">
             {articleContent}
           </p>
         </div>

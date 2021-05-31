@@ -37,7 +37,7 @@ const AllArticles = () => {
             ))) }
             
           </div>
-          <span className="bg-white p-4 rounded-xl font-medium text-xl my-8 sm:text-2xl sm:p-4" onClick={showMore}>
+          <span className="cursor-pointer bg-white p-4 rounded-xl font-medium text-xl my-8 sm:text-2xl sm:p-4" onClick={showMore}>
           Show More Articles
         </span>
         </div>

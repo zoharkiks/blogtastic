@@ -1,15 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 // Import Icons
 import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import EmailIcon from "@material-ui/icons/Email";
 import InstagramIcon from "@material-ui/icons/Instagram";
+import ArrowUpwardRoundedIcon from "@material-ui/icons/ArrowUpwardRounded";
 
 const Footer = () => {
+  const [visible, setVisible] = useState(false);
+
+  // Show button when page is scorlled upto given distance
+  const toggleVisibility = () => {
+    if (window.pageYOffset > 300) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  };
+
+  // Set the top cordinate to 0
+  // make scrolling smooth
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+  }, []);
+
   return (
     <div className="footer">
       <div className="bg-braintree flex flex-col items-center pb-8 p-2 space-y-5 lg:flex-row lg:justify-evenly lg:items-center">
-
         {/* Icons */}
         <div className=" flex justify-center items-center mt-4 space-x-5">
           <a
@@ -17,7 +42,7 @@ const Footer = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <GitHubIcon className="text-white sm:!text-4xl"  />
+            <GitHubIcon className="text-white sm:!text-4xl" />
           </a>
 
           <a
@@ -42,7 +67,9 @@ const Footer = () => {
         </div>
         {/* ------------------------- */}
 
-        <span className="text-white mt-3 sm:text-xl">Sign Up for Awesome Newsletters</span>
+        <span className="text-white mt-3 sm:text-xl">
+          Sign Up for Awesome Newsletters
+        </span>
         <form action="" className="relative mt-3">
           <input
             type="text"
@@ -56,8 +83,16 @@ const Footer = () => {
           >
             Sign Up
           </button>
-          </form>
-        </div>
+        </form>
+        {visible ? (
+          <ArrowUpwardRoundedIcon
+            onClick={scrollToTop}
+            className=" fixed rounded-full right-[20px] bottom-[30px] bg-illusion border-2 border-white h-4 w-4 !text-[2.5rem] sm:!text-[3.5rem] lg:hidden"
+          />
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };
