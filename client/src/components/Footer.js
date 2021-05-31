@@ -84,15 +84,17 @@ const Footer = () => {
             Sign Up
           </button>
         </form>  
-        
+        <div className="lg:hidden">
         {visible ? (
           <ArrowUpwardRoundedIcon
             onClick={scrollToTop}
-            className=" fixed rounded-full right-[20px] bottom-[30px] bg-illusion border-2 border-white h-4 w-4 !text-[2.5rem] sm:!text-[3.5rem] lg:hidden"
+            className=" fixed rounded-full right-[20px] bottom-[30px] bg-illusion border-2 border-white h-4 w-4 !text-[2.5rem] sm:!text-[3.5rem] "
           />
         ) : (
           ""
         )}
+        </div>
+        
       </div>
     </div>
   );

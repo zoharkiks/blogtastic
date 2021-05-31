@@ -1,6 +1,7 @@
 import {React} from 'react';
 import { Link } from 'react-router-dom';
 import {dateParser} from '../helpers/date.js'
+import firstLetter from '../helpers/firstLetter'
 import Avatar from '@material-ui/core/Avatar'
 import '../App.css'
 
@@ -19,7 +20,7 @@ const Article = ({title,date,id,shortDesc, author,category, coverImg}) => {
                 <div className="flex flex-col justify-center px-2 sm:space-y-4">
                 <h1 className='font-medium my-2 text-xl sm:text-2xl'>{title}</h1>
                 <div className="flex items-center space-x-3 mb-4">
-                    <Avatar />
+                    <Avatar>{firstLetter(author)}</Avatar>
                 <span className='text-sm italic sm:text-lg'>{author}</span>
                 </div>                
                 <p className='mb-3 sm:text-xl md:truncate '>{shortDesc}</p>

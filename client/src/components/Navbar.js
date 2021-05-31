@@ -33,7 +33,7 @@ const Navbar = () => {
       <div className="bg-braintree flex justify-between items-center px-4 h-20 lg:px-7">
         <h1 className="text-xl text-white font-medium sm:text-2xl ">
           {" "}
-          <Link to="/">Blogtastic</Link>
+          <Link onClick={clear} to="/">Blogtastic</Link>
         </h1>
 
         <div className="relative hidden lg:flex">
