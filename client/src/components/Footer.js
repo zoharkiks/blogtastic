@@ -84,6 +84,7 @@ const Footer = () => {
             Sign Up
           </button>
         </form>
+        
         {visible ? (
           <ArrowUpwardRoundedIcon
             onClick={scrollToTop}
