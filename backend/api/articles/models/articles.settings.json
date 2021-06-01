@@ -56,6 +56,10 @@
     "author": {
       "type": "string",
       "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "articleTitle"
     }
   }
 }

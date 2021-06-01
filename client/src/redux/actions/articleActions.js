@@ -21,11 +21,11 @@ export const removeSelectedArticle = ()=>{
   }
 }
 
-  export const fetchArticle = (id)=>{
+  export const fetchArticle = (slug)=>{
       return(dispatch)=>{
         dispatch(seletcedArticleStart())
         axios
-        .get(`http://localhost:1337/articles/${id}`)
+        .get(`http://localhost:1337/articles/${slug}`)
         .then((res) => {
           const data = res.data;
           dispatch(selectedArticle(data));

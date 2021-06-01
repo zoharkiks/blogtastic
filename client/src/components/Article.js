@@ -5,7 +5,7 @@ import firstLetter from '../helpers/firstLetter'
 import Avatar from '@material-ui/core/Avatar'
 import '../App.css'
 
-const Article = ({title,date,id,shortDesc, author,category, coverImg}) => {
+const Article = ({title,date,id,shortDesc, author,category, coverImg,slug}) => {
 
 
 
@@ -24,7 +24,7 @@ const Article = ({title,date,id,shortDesc, author,category, coverImg}) => {
                 <span className='text-sm italic sm:text-lg'>{author}</span>
                 </div>                
                 <p className='mb-3 sm:text-xl md:truncate '>{shortDesc}</p>
-                <Link to={`/articles/${id}`}>
+                <Link to={`/articles/${slug}`}>
                 <span className="text-blue-500 sm:text-lg cursor-pointer">Read More...</span>
                 </Link>
                 <img className='mt-5 object-scale-down h-48 w-full' src={coverImg} alt="" />

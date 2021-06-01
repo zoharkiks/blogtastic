@@ -34,7 +34,7 @@ const Footer = () => {
 
   return (
     <div className="footer">
-      <div className="bg-braintree flex flex-col items-center pb-8 p-2 space-y-5 lg:flex-row lg:justify-evenly lg:items-center">
+      <div className="bg-braintree flex flex-col items-center p-2 space-y-5 lg:flex-row lg:justify-evenly lg:items-center">
         {/* Icons */}
         <div className=" flex justify-center items-center mt-4 space-x-5">
           <a

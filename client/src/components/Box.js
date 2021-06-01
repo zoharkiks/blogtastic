@@ -7,6 +7,7 @@ const Box = () => {
   const articles = useSelector((state) => state.allArticles.articles);
   const loading = useSelector((state) => state.allArticles.loading);
 
+  
 
 
   
@@ -24,7 +25,7 @@ const Box = () => {
                 <Article
                   category={article.categories[0].categoryName}
                   key={article._id}
-                  id={article._id}
+                  slug={article.slug}
                   title={article.articleTitle}
                   date={article.published_at}
                   description={article.articleContent}
