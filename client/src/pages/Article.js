@@ -35,7 +35,7 @@ const Article = () => {
 
 
   const article = useSelector((state) => state.article);
-console.log(article);
+  
   const {
     articleTitle,
     articleContent,

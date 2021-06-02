@@ -16,9 +16,6 @@ const Category = () => {
 //   Getting category id
   const categoryId = useParams()
   const dispatch = useDispatch()
-
-  console.log(selectedCategory);
-
   
   // Pagination
   const [visible, setVisible] = useState(4);
