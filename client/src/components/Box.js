@@ -4,11 +4,11 @@ import Article from "./Article";
 import MyLoader from "./MyLoader";
 
 const Box = () => {
+  
   const articles = useSelector((state) => state.allArticles.articles);
   const loading = useSelector((state) => state.allArticles.loading);
 
-  
-
+  console.log(articles);
 
   
   return (
@@ -24,6 +24,7 @@ const Box = () => {
               .map((article) => (
                 <Article
                   category={article.categories[0].categoryName}
+                slugCategory = {article.categories[0].slug}
                   key={article._id}
                   slug={article.slug}
                   title={article.articleTitle}

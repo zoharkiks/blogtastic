@@ -4,9 +4,17 @@ import {dateParser} from '../helpers/date.js'
 import firstLetter from '../helpers/firstLetter'
 import Avatar from '@material-ui/core/Avatar'
 import '../App.css'
+import { useDispatch} from 'react-redux';
+import {fetchCategory} from '../redux/actions/categoryAction'
 
-const Article = ({title,date,id,shortDesc, author,category, coverImg,slug}) => {
+const Article = ({title,date,shortDesc, author,category, coverImg,slug, slugCategory}) => {
 
+const dispatch = useDispatch()
+
+// Fetching particular category using id
+const fetchCat=()=>{
+dispatch(fetchCategory(slugCategory))
+}
 
 
     return (
@@ -14,7 +22,7 @@ const Article = ({title,date,id,shortDesc, author,category, coverImg,slug}) => {
             
             <div  className="bg-white flex flex-col justify-center  mx-2 space-y-2 p-4 rounded-lg font-montserrat sm:space-y-5 ">
                 <div className=" space-y-2  flex flex-col justify-start items-start p-3 ">
-                <span className='bg-green-300 rounded-2xl p-1 px-3 sm:text-xl '># {category}`</span>
+                <span onClick={fetchCat} className='bg-green-300 rounded-2xl p-1 px-3 sm:text-xl '><Link to={`/categories/${slugCategory}`}># {category}</Link></span>
                 <h1 className='text-gray-600 sm:text-xl'>{dateParser(`${date}`)}</h1>
                 </div>
                 <div className="flex flex-col justify-center px-2 sm:space-y-4">

@@ -11,8 +11,9 @@ import AllArticles from "./pages/AllArticles";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import ScrollToTop from "./helpers/ScrollToTop";
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "./redux/actions/dataActions";
+import Category from "./pages/Category";
 
 function App() {
   // Getting all the articles
@@ -31,6 +32,11 @@ function App() {
             <Route path="/articles/:id" component={Article} />
 
             <Route path="/allArticles/" component={AllArticles} />
+
+            <Route path='/categories/:id' component={Category} />
+
+
+
 
             <Route path="/" exact >
               <Modal/>

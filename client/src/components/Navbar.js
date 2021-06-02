@@ -11,6 +11,8 @@ const Navbar = () => {
   // Access State
   const articles = useSelector((state) => state.allArticles.articles);
 
+  console.log(articles);
+
   // Params
   const clear = () => {
     Array.from(document.querySelectorAll("input")).forEach(
@@ -25,7 +27,7 @@ const Navbar = () => {
 
   const handleMenu = () => {
     setOpen(!open);
-    setSearchTerm("");
+    clear();
   };
 
   return (
@@ -33,7 +35,9 @@ const Navbar = () => {
       <div className="bg-braintree flex justify-between items-center px-4 h-20 lg:px-7">
         <h1 className="text-xl text-white font-medium sm:text-2xl ">
           {" "}
-          <Link onClick={clear} to="/">Blogtastic</Link>
+          <Link onClick={clear} to="/">
+            Blogtastic
+          </Link>
         </h1>
 
         <div className="relative hidden lg:flex">
@@ -49,42 +53,47 @@ const Navbar = () => {
           <SearchIcon className="absolute right-1 top-1 text-white sm:top-2 sm:right-2" />
         </div>
 
-        <div className="bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 rounded-xl border-gray-200 absolute w-1/2 top-[4rem] left-[9rem]  hidden lg:inline z-10 ">
-            
-          <div className="flex flex-col justify-center items-center space-y-5 relative xl:space-y-2 ">
-      {searchTerm && searchTerm.length >=2 ? <span className="text-2xl mt-2 text-left w-full ml-20 text-white">Your search results:</span> : ''}
-            {articles
-              .filter((article) => {
-                const title = article.articleTitle.toLowerCase();
-                const term = searchTerm.toLowerCase();
-                if (searchTerm === "") {
-                  return null;
-                } else if (title.includes(term) && term.length >= 2) {
-                  return article;
-                }
-                return false;
-              })
-              .map((article) => {
-                return (
-                  <div key={article._id} className="py-4">
-                    <Link to={`/articles/${article._id}`} onClick={clear}>
-                      <div className="bg-illusion p-4 text-white rounded-full text-xl flex flex-col justify-center items-center text-center sm:text-2xl">
-                        <h1>{article.articleTitle}</h1>
-                        <span className="text-center font-light text-sm sm:text-lg ">
-                          by: {article.author}
-                        </span>
-                      </div>
-                    </Link>
-                  </div>
-                );
-              })}
+        {searchTerm && searchTerm.length >= 2 ?  (
+          <div className="bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 rounded-xl border-gray-200 absolute max-h-[20rem] w-1/2 top-[4rem] left-[9rem]  hidden lg:inline z-10 ">
+            <div className="flex flex-col justify-center items-center space-y-5 relative xl:space-y-2 ">
+              <span className="text-2xl mt-2 text-left w-full ml-20 text-white">
+                Your search results:
+              </span>
+              {articles
+                .filter((article) => {
+                  const title = article.articleTitle.toLowerCase();
+                  const term = searchTerm.toLowerCase();
+                  if (searchTerm === "") {
+                    return null;
+                  } else if (title.includes(term) && term.length >=2 ) {
+                    return article;
+                  }
+                  return false;
+                })
+                .map((article) => {
+                  return (
+                    <div key={article._id} className="py-2">
+                      <Link to={`/articles/${article.slug}`} onClick={clear}>
+                        <div className="bg-illusion p-4 text-white rounded-full text-xl flex flex-col justify-center items-center text-center sm:text-2xl">
+                          <h1>{article.articleTitle}</h1>
+                          <span className="text-center font-light text-sm sm:text-lg ">
+                            by: {article.author}
+                          </span>
+                        </div>
+                      </Link>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
 
-        <span className="text-xl text-white hidden lg:inline">
-          <Link to="/allArticles/"> All Articles</Link>
+        <span className="text-xl text-white hidden lg:inline" onClick={clear}>
+          <Link  to="/allArticles/"> All Articles</Link>
         </span>
-        <span className="text-xl text-white hidden lg:inline">About Me</span>
+        <span className="text-xl text-white hidden lg:inline" onClick={clear}>About Me</span>
 
         {/* -----------------------MOBILE NAVIGATION-------------------- */}
 
@@ -97,7 +106,7 @@ const Navbar = () => {
         </div>
       </div>
       {open ? (
-        <div className="bg-taupe h-screen w-full p-5  fixed top-0 z-10 lg:hidden ">
+        <div className="bg-taupe h-screen w-full p-5 fixed top-0 z-10 lg:hidden ">
           <div className="bg-white w-full flex min-h-2/3 flex-col justify-start items-center pt-10 p-3 relative ">
             <CloseIcon
               onClick={handleMenu}
@@ -115,47 +124,55 @@ const Navbar = () => {
               />
               <SearchIcon className="absolute right-1 top-1 text-white sm:top-4 sm:right-2" />
             </div>
-
-            <div className="flex flex-col justify-start items-center  space-y-3">
-              <div className="flex flex-col justify-center items-center space-y-5 relative ">
-                {articles
-                  .filter((article) => {
-                    const title = article.articleTitle.toLowerCase();
-                    const term = searchTerm.toLowerCase();
-                    if (searchTerm === "") {
-                      return null;
-                    } else if (title.includes(term) && term.length >= 2) {
-                      return article;
-                    }
-                    return false;
-                  })
-                  .map((article) => {
-                    return (
-                      <div key={article._id}>
-                        <Link to={`/articles/${article._id}`}>
-                          <div
-                            className="bg-illusion p-4 text-white rounded-full text-xl flex flex-col justify-center items-center text-center sm:text-2xl"
-                            onClick={handleMenu}
-                          >
-                            <h1>{article.articleTitle}</h1>
-                            <span className="text-center font-light text-sm sm:text-lg ">
-                              by: {article.author}
-                            </span>
+            {searchTerm && searchTerm.length >=2 ? (
+              <div className='bg-clip-padding bg-gray-400 backdrop-filter backdrop-blur-xl bg-opacity-60 rounded-xl p-3 my-2 border-gray-200 max-h-[15rem] sm:w-[30rem]'>
+                <div className="flex flex-col justify-start items-center  space-y-3">
+                  <div className="flex flex-col justify-center items-center space-y-5 relative ">
+                    {articles
+                      .filter((article) => {
+                        const title = article.articleTitle.toLowerCase();
+                        const term = searchTerm.toLowerCase();
+                        if (searchTerm === "") {
+                          return null;
+                        } else if (title.includes(term) && term.length >=2) {
+                          return article;
+                        }
+                        return false;
+                      })
+                      .map((article) => {
+                        return (
+                          <div key={article._id}>
+                            <Link to={`/articles/${article.slug}`}>
+                              <div
+                                className="bg-illusion p-4 text-white rounded-full text-xl flex flex-col justify-center items-center text-center sm:text-2xl"
+                                onClick={handleMenu}
+                              >
+                                <h1>{article.articleTitle}</h1>
+                                <span className="text-center font-light text-sm sm:text-lg ">
+                                  by: {article.author}
+                                </span>
+                              </div>
+                            </Link>
                           </div>
-                        </Link>
-                      </div>
-                    );
-                  })}
+                        );
+                      })}
+                  </div>
+                </div>
               </div>
+            ) : (
+              ""
+            )}
 
-              <span className="sm:text-2xl" onClick={handleMenu}>
-                <Link to="/">Home</Link>
-              </span>
-              <span className="sm:text-2xl" onClick={handleMenu}>
-                <Link to="/allArticles/"> All Articles</Link>
-              </span>
-              <span className="sm:text-2xl">About Me</span>
-            </div>
+          <div className="flex flex-col items-center space-y-2">
+          <span className="sm:text-2xl" onClick={handleMenu}>
+              <Link to="/">Home</Link>
+            </span>
+            <span className="sm:text-2xl" onClick={handleMenu}>
+              <Link to="/allArticles/"> All Articles</Link>
+            </span>
+            <span className="sm:text-2xl">About Me</span>
+          </div>
+            
           </div>
         </div>
       ) : (

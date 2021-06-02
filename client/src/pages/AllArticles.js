@@ -25,6 +25,8 @@ const AllArticles = () => {
             {loading ? (<MyLoader/>) : (articles.slice(0, visible).map((article) => (
               <Article
                 category={article.categories[0].categoryName}
+                slugCategory = {article.categories[0].slug}
+                slug={article.slug}
                 key={article._id}
                 id={article._id}
                 title={article.articleTitle}
