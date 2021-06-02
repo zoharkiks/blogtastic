@@ -8,7 +8,6 @@ const Box = () => {
   const articles = useSelector((state) => state.allArticles.articles);
   const loading = useSelector((state) => state.allArticles.loading);
 
-  console.log(articles);
 
   
   return (

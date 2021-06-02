@@ -17,6 +17,7 @@ const Category = () => {
   const categoryId = useParams()
   const dispatch = useDispatch()
 
+
   
   // Pagination
   const [visible, setVisible] = useState(4);
@@ -53,7 +54,8 @@ const Category = () => {
                 ?.map((article) => (
                   <Article
                     category={category.categoryName}
-                    categoryId = {category.id}
+                    slugCategory = {category.slug}
+                    slug={article.slug}
                     key={article._id}
                     id={article._id}
                     title={article.articleTitle}

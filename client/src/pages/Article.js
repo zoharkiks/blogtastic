@@ -25,6 +25,7 @@ import {
 import MyLoader from "../components/MyLoader";
 // Helper functions
 import { dateParser } from "../helpers/date.js";
+import { Link } from "react-router-dom";
 
 const Article = () => {
   
@@ -32,8 +33,9 @@ const Article = () => {
   const dispatch = useDispatch();
   const articleId = useParams();
 
-  const article = useSelector((state) => state.article);
 
+  const article = useSelector((state) => state.article);
+console.log(article);
   const {
     articleTitle,
     articleContent,
@@ -65,9 +67,9 @@ const Article = () => {
             <h1 className="text-center text-2xl px-4 sm:text-3xl sm:px-5">
               {articleTitle}
             </h1>
-            <span className="bg-green-300 rounded-2xl p-1 px-3 font-light sm:text-xl ">
+            <span className="bg-green-300 rounded-2xl p-1 px-3 font-light sm:text-xl "><Link to={`/categories/${categories ? categories[0].slug : null}`} >
               # {categories ? categories[0].categoryName : null}
-            </span>
+              </Link> </span>
             <p className="text-center italic font-normal px-3 sm:text-2xl">
               {shortDesc}
             </p>
