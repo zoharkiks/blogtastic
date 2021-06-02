@@ -17,6 +17,7 @@ const Category = () => {
   const categoryId = useParams()
   const dispatch = useDispatch()
 
+  console.log(selectedCategory);
 
   
   // Pagination
@@ -50,7 +51,7 @@ const Category = () => {
               <MyLoader />
             ) : (
               articles
-                ?.slice(0, visible)
+                ?.slice(0, visible).reverse()
                 ?.map((article) => (
                   <Article
                     category={category.categoryName}
@@ -59,7 +60,7 @@ const Category = () => {
                     key={article._id}
                     id={article._id}
                     title={article.articleTitle}
-                    date={article.published_at}
+                    date={article.updatedAt}
                     description={article.articleContent}
                     shortDesc={article.shortDesc}
                     author={article.author}

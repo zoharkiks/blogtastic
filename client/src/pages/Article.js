@@ -40,7 +40,7 @@ console.log(article);
     articleTitle,
     articleContent,
     coverImage,
-    published_at,
+    updatedAt,
     loading,
     shortDesc,
     author,
@@ -77,7 +77,7 @@ console.log(article);
               by: {author}
             </span>
             <span className="text-center font-light text-sm sm:text-xl">
-              {dateParser(`${published_at}`)}
+              {dateParser(`${updatedAt}`)}
             </span>
 
             {/* Share Icons */}

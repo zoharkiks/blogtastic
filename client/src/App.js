@@ -1,19 +1,21 @@
 import "./App.css";
 import { useEffect } from "react";
 // Components and Pages
-import Article from "./pages/Article";
 import Box from "./components/Box";
 import Footer from "./components/Footer";
 import Modal from "./components/Modal";
 import Navbar from "./components/Navbar";
 import AllArticles from "./pages/AllArticles";
+import Article from "./pages/Article";
+import Category from "./pages/Category";
+import AboutMe from "./pages/AboutMe";
+
 // Routing
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import ScrollToTop from "./helpers/ScrollToTop";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "./redux/actions/dataActions";
-import Category from "./pages/Category";
 
 function App() {
   // Getting all the articles
@@ -35,7 +37,7 @@ function App() {
 
             <Route path='/categories/:id' component={Category} />
 
-
+            <Route path='/about-me' component={AboutMe} />
 
 
             <Route path="/" exact >

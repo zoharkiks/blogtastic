@@ -11,7 +11,6 @@ const Navbar = () => {
   // Access State
   const articles = useSelector((state) => state.allArticles.articles);
 
-  console.log(articles);
 
   // Params
   const clear = () => {
@@ -93,7 +92,7 @@ const Navbar = () => {
         <span className="text-xl text-white hidden lg:inline" onClick={clear}>
           <Link  to="/allArticles/"> All Articles</Link>
         </span>
-        <span className="text-xl text-white hidden lg:inline" onClick={clear}>About Me</span>
+        <span className="text-xl text-white hidden lg:inline" onClick={clear}><Link to='/about-me'>About Me</Link></span>
 
         {/* -----------------------MOBILE NAVIGATION-------------------- */}
 
@@ -101,7 +100,7 @@ const Navbar = () => {
           <MenuIcon
             onClick={handleMenu}
             fontSize="large"
-            className=" text-white cursor-pointer "
+          className=" text-white cursor-pointer "
           />
         </div>
       </div>
@@ -170,7 +169,7 @@ const Navbar = () => {
             <span className="sm:text-2xl" onClick={handleMenu}>
               <Link to="/allArticles/"> All Articles</Link>
             </span>
-            <span className="sm:text-2xl">About Me</span>
+            <span className="sm:text-2xl" onClick={handleMenu}><Link to='/about-me'>About Me</Link></span>
           </div>
             
           </div>

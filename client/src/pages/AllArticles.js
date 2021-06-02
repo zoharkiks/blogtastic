@@ -30,7 +30,7 @@ const AllArticles = () => {
                 key={article._id}
                 id={article._id}
                 title={article.articleTitle}
-                date={article.published_at}
+                date={article.updatedAt}
                 description={article.articleContent}
                 shortDesc={article.shortDesc}
                 author={article.author}

@@ -27,7 +27,7 @@ const Box = () => {
                   key={article._id}
                   slug={article.slug}
                   title={article.articleTitle}
-                  date={article.published_at}
+                  date={article.updatedAt}
                   description={article.articleContent}
                   shortDesc={article.shortDesc}
                   author={article.author}

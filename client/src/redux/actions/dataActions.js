@@ -20,7 +20,7 @@ export const fetchData = () => {
   return (dispatch) => {
     dispatch(setArticlesStart())
        axios
-      .get(`http://localhost:1337/articles?_sort=published_at:DESC`)
+      .get(`http://localhost:1337/articles?_sort=updatedAt:DESC`)
       .then((res) => {
         const data = res.data;
         dispatch(setArticles(data));
