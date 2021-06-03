@@ -18,7 +18,7 @@ const Navbar = () => {
       (input) => (input.value = "")
     );
     setSearchTerm("");
-  };
+  }; 
 
   // Expanding on mobile
   const [open, setOpen] = useState(false);
@@ -31,8 +31,8 @@ const Navbar = () => {
 
   return (
     <div className="Navbar font-montserrat ">
-      <div className="bg-braintree flex justify-between items-center px-4 h-20 lg:px-7">
-        <h1 className="text-xl text-white font-medium sm:text-2xl ">
+      <div className="bg-[#24272B] flex justify-between items-center px-4 h-20 lg:px-7">
+        <h1 className="text-3xl text-[#F1DAC4] font-semibold sm:text-2xl ">
           {" "}
           <Link onClick={clear} to="/">
             Blogtastic
@@ -99,8 +99,8 @@ const Navbar = () => {
         <div className="lg:hidden">
           <MenuIcon
             onClick={handleMenu}
-            fontSize="large"
-          className=" text-white cursor-pointer "
+            
+          className=" text-[#F1DAC4] !text-[45px] "
           />
         </div>
       </div>
