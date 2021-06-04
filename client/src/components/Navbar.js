@@ -31,8 +31,8 @@ const Navbar = () => {
 
   return (
     <div className="Navbar font-montserrat ">
-      <div className="bg-[#24272B] flex justify-between items-center px-4 h-20 lg:px-7">
-        <h1 className="text-3xl text-[#F1DAC4] font-semibold sm:text-2xl ">
+      <div className="bg-[#24272B] flex justify-between items-center px-4 py-2 h-20 lg:px-7">
+        <h1 className="text-3xl text-[#F1DAC4] py-2 font-semibold sm:text-2xl ">
           {" "}
           <Link onClick={clear} to="/">
             Blogtastic
