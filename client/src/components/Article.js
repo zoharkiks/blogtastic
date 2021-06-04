@@ -1,46 +1,63 @@
-import {React} from 'react';
-import { Link } from 'react-router-dom';
-import {dateParser} from '../helpers/date.js'
-import firstLetter from '../helpers/firstLetter'
-import Avatar from '@material-ui/core/Avatar'
-import '../App.css'
-import { useDispatch} from 'react-redux';
-import {fetchCategory} from '../redux/actions/categoryAction'
+import { React } from "react";
+import { Link } from "react-router-dom";
+import { dateParser } from "../helpers/date.js";
+import firstLetter from "../helpers/firstLetter";
+import Avatar from "@material-ui/core/Avatar";
+import "../App.css";
+import { useDispatch } from "react-redux";
+import { fetchCategory } from "../redux/actions/categoryAction";
 
-const Article = ({title,date,shortDesc, author,category, coverImg,slug, slugCategory}) => {
+const Article = ({
+  title,
+  date,
+  shortDesc,
+  author,
+  category,
+  coverImg,
+  slug,
+  slugCategory,
+}) => {
+  const dispatch = useDispatch();
 
-const dispatch = useDispatch()
+  // Fetching particular category using id
+  const fetchCat = () => {
+    dispatch(fetchCategory(slugCategory));
+  };
 
-// Fetching particular category using id
-const fetchCat=()=>{
-dispatch(fetchCategory(slugCategory))
-}
+  return (
+    <div className="article">
+      <div className="bg-[#24272B] border-l-4 px-[15px] py-4 border-[#BA274A] flex flex-col justify-center rounded-xl font-montserrat sm:space-y-5 ">
+      <Link to={`/articles/${slug}`}>
+        <img
+          className="object-scale-down h-48 w-full"
+          src={coverImg}
+          alt=""
+        /></Link>
+        <span
+          onClick={fetchCat}
+          className="bg-[#F26419] text-[#F1DAC4] font-semibold text-center rounded-[10px] my-[12px] h-6 w-20  sm:text-xl "
+        >
+          <Link to={`/categories/${slugCategory}`}># {category}</Link>
+        </span>
+        <h1 className="text-[#F1DAC4] font-bold text-2xl mb-2  sm:text-2xl">
+          {title}
+        </h1>
+        <span className="text-[#F1DAC4] font-bold text-[18px] mb-4 sm:text-lg ">
+          By {author}
+        </span>
+        <p className="text-[#F1DAC4] font-montserrat tracking-[2px] font-medium text-[14px] sm:text-xl md:truncate ">
+          {shortDesc}
+        </p>
+        <h1 className="text-[#F1DAC4] italic text-[18px]  mt-3 sm:text-xl">{dateParser(`${date}`)}</h1>
 
-
-    return (
-        <div className='article'>
-            
-            <div  className="bg-white flex flex-col justify-center  mx-2 space-y-2 p-4 rounded-lg font-montserrat sm:space-y-5 ">
-                <div className=" space-y-2  flex flex-col justify-start items-start p-3 ">
-                <span onClick={fetchCat} className='bg-green-300 rounded-2xl p-1 px-3 sm:text-xl '><Link to={`/categories/${slugCategory}`}># {category}</Link></span>
-                <h1 className='text-gray-600 sm:text-xl'>{dateParser(`${date}`)}</h1>
-                </div>
-                <div className="flex flex-col justify-center px-2 sm:space-y-4">
-                <h1 className='font-medium my-2 text-xl sm:text-2xl'>{title}</h1>
-                <div className="flex items-center space-x-3 mb-4">
-                    <Avatar>{firstLetter(author)}</Avatar>
-                <span className='text-sm italic sm:text-lg'>{author}</span>
-                </div>                
-                <p className='mb-3 sm:text-xl md:truncate '>{shortDesc}</p>
-                <Link to={`/articles/${slug}`}>
-                <span className="text-blue-500 sm:text-lg cursor-pointer">Read More...</span>
-                </Link>
-                <img className='mt-5 object-scale-down h-48 w-full' src={coverImg} alt="" />
-                </div>             
-            </div>
+          
+            <span className="text-blue-500 sm:text-lg cursor-pointer">
+              Read More...
+            </span>
         
         </div>
-    )
-}
+      </div>
+  );
+};
 
-export default Article
+export default Article;

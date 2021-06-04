@@ -12,8 +12,8 @@ const Box = () => {
   
   return (
     <div className="box font-montserrat">
-      <div className="bg-taupe px-4 p-8 flex flex-col justify-center items-center space-y-8">
-        <h1 className="text-2xl p-4 sm:text-3xl ">EDITOR'S CHOICE</h1>
+      <div className="bg-[#9448BC] px-4 pt-6 pb-[18px] flex flex-col justify-center items-center space-y-8">
+        <h1 className="text-2xl text-[#F1DAC4] underline font-bold sm:text-3xl ">Featured Articles</h1>
         <div className=" grid gap-y-8 md:grid-cols-2 md:grid-rows-2 md:gap-y-10 xl:grid-cols-3 xl:grid-rows-1">
           {loading ? (
             <MyLoader className='w-screen' />
@@ -38,8 +38,8 @@ const Box = () => {
         </div>
 
         
-          <span className="bg-white cursor-pointer p-3 px-6 rounded-full font-medium text-xl my-5 sm:text-2xl sm:px-8">
-          <Link to={"/allArticles"}> All Articles</Link>
+        <span className="bg-[#F1DAC4] text-[#24272B] mt-7 h-[43px] w-[138px] rounded-[20px] text-center py-[13px] font-bold text-[14px] leading-[17px] ">
+          <Link to={"/allArticles"}> Explore More</Link>
           </span>
         
       </div>
