@@ -21,13 +21,6 @@ const Footer = () => {
     }
   };
 
-  window.onscroll = function (e) {
-    // console.log(window.scrollY);
-    
-
-    
-
-  };
 
   // Set the top cordinate to 0
   // make scrolling smooth
