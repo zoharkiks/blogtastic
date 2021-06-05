@@ -35,9 +35,9 @@ const Article = ({
         /></Link>
         <span
           onClick={fetchCat}
-          className="bg-[#F26419] text-[#F1DAC4] font-semibold text-center rounded-[10px] my-[12px] h-6 w-20  sm:text-xl "
+          className="bg-[#F26419] text-[#F1DAC4] font-semibold text-center rounded-[10px] my-[12px] h-6 w-28  sm:text-xl "
         >
-          <Link to={`/categories/${slugCategory}`}># {category}</Link>
+          <Link to={`/categories/${slugCategory}`}>#{category}</Link>
         </span>
         <h1 className="text-[#F1DAC4] font-bold text-2xl mb-2  sm:text-2xl">
           {title}
@@ -49,12 +49,6 @@ const Article = ({
           {shortDesc}
         </p>
         <h1 className="text-[#F1DAC4] italic text-[18px]  mt-3 sm:text-xl">{dateParser(`${date}`)}</h1>
-
-          
-            <span className="text-blue-500 sm:text-lg cursor-pointer">
-              Read More...
-            </span>
-        
         </div>
       </div>
   );

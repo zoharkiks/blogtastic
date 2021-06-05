@@ -12,11 +12,21 @@ const Footer = () => {
 
   // Show button when page is scorlled upto given distance
   const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
+    var rootElement = document.documentElement
+    var scrollTotal = rootElement.scrollHeight - rootElement.clientHeight
+    if (window.pageYOffset > 300 &&  window.pageYOffset < scrollTotal - 176) {
       setVisible(true);
     } else {
       setVisible(false);
     }
+  };
+
+  window.onscroll = function (e) {
+    // console.log(window.scrollY);
+    
+
+    
+
   };
 
   // Set the top cordinate to 0
@@ -33,16 +43,16 @@ const Footer = () => {
   }, []);
 
   return (
-    <div className="footer">
-      <div className="bg-braintree flex flex-col items-center pb-2 p-2 space-y-5 lg:flex-row lg:justify-evenly lg:items-center lg:pb-4">
+    <div className="footer font-montserrat">
+      <div className="bg-[#24272B] flex flex-col items-center py-6 lg:flex-row lg:justify-evenly lg:items-center lg:pb-4">
         {/* Icons */}
-        <div className=" flex justify-center items-center mt-4 space-x-5">
+        <div className=" flex justify-center mb-6 items-center space-x-5">
           <a
             href="https://github.com/zoharkiks/"
             target="_blank"
             rel="noreferrer"
           >
-            <GitHubIcon className="text-white sm:!text-4xl" />
+            <GitHubIcon className="text-[#F26419] !text-3xl sm:!text-4xl" />
           </a>
 
           <a
@@ -50,11 +60,11 @@ const Footer = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <LinkedInIcon className="text-white sm:!text-4xl" />
+            <LinkedInIcon className="text-[#F26419] !text-3xl sm:!text-4xl" />
           </a>
 
           <a href="mailto:zoharkiks">
-            <EmailIcon className="text-white sm:!text-4xl" />
+            <EmailIcon className="text-[#F26419] !text-3xl sm:!text-4xl" />
           </a>
 
           <a
@@ -62,19 +72,19 @@ const Footer = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <InstagramIcon className="text-white sm:!text-4xl" />
+            <InstagramIcon className="text-[#F26419] !text-3xl sm:!text-4xl" />
           </a>
         </div>
         {/* ------------------------- */}
 
-        <span className="text-white mt-3 sm:text-xl">
+        <span className="text-[#F1DAC4] font-bold text-lg   sm:text-xl">
           Sign Up for Awesome Newsletters
         </span>
-        <form action="" className="relative mt-3">
+        <form action="" className="relative mt-2">
           <input
             type="text"
             name=""
-            className="bg-gray-300 rounded-xl pl-4 py-1 outline-none sm:px-8 sm:py-2 lg:mb-0  "
+            className="bg-[#BA274A] text-[#F1DAC4] placeholder-[#F1DAC4] w-72  rounded-xl pl-4 py-1 outline-none sm:px-8 sm:py-2 lg:mb-0  "
             placeholder="Your Email"
           />
           <button
@@ -88,7 +98,7 @@ const Footer = () => {
         {visible ? (
           <ArrowUpwardRoundedIcon
             onClick={scrollToTop}
-            className=" fixed rounded-full right-[20px] bottom-[30px] bg-illusion border-2 border-white h-4 w-4 !text-[2.5rem] sm:!text-[3.5rem] "
+            className=" fixed rounded-full right-[20px] bottom-[30px] bg-[#F26419] border-2 border-[#F1DAC4] h-4 w-4 !text-[2.5rem] sm:!text-[3.5rem] "
           />
         ) : (
           ""
