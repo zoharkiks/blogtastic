@@ -16,29 +16,44 @@ const Article = ({
   coverImg,
   slug,
   slugCategory,
+  slugCategory2,
+  category2,
 }) => {
   const dispatch = useDispatch();
 
   // Fetching particular category using id
   const fetchCat = () => {
     dispatch(fetchCategory(slugCategory));
+    dispatch(fetchCategory(slugCategory2));
+
   };
 
   return (
     <div className="article">
       <div className="bg-[#24272B] border-l-4 px-[15px] py-4 border-[#BA274A] flex flex-col justify-center rounded-xl font-montserrat sm:space-y-5 ">
-      <Link to={`/articles/${slug}`}>
-        <img
-          className="object-scale-down h-48 w-full"
-          src={coverImg}
-          alt=""
-        /></Link>
+        <Link to={`/articles/${slug}`}>
+          <img
+            className="object-scale-down h-48 w-full"
+            src={coverImg}
+            alt=""
+          />
+        </Link>
         <span
           onClick={fetchCat}
           className="bg-[#F26419] text-[#F1DAC4] font-semibold text-left rounded-[10px] my-[12px] px-2 max-h-8 w-min  sm:text-xl "
         >
           <Link to={`/categories/${slugCategory}`}>#{category}</Link>
         </span>
+        {slugCategory2 ? (
+          <span
+            onClick={fetchCat}
+            className="bg-[#066f8a] text-[#F1DAC4] font-semibold text-left rounded-[10px] my-[12px] px-2 max-h-8 w-min  sm:text-xl "
+          >
+            <Link to={`/categories/${slugCategory2}`}>#{category2}</Link>
+          </span>
+        ) : (
+          ""
+        )}
         <h1 className="text-[#F1DAC4] font-bold text-2xl mb-2  sm:text-2xl">
           {title}
         </h1>
@@ -48,9 +63,11 @@ const Article = ({
         <p className="text-[#F1DAC4] font-montserrat tracking-[2px] font-medium text-[14px] sm:text-xl md:truncate ">
           {shortDesc}
         </p>
-        <h1 className="text-[#F1DAC4] italic text-[18px]  mt-3 sm:text-xl">{dateParser(`${date}`)}</h1>
-        </div>
+        <h1 className="text-[#F1DAC4] italic text-[18px]  mt-3 sm:text-xl">
+          {dateParser(`${date}`)}
+        </h1>
       </div>
+    </div>
   );
 };
 

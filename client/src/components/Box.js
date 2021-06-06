@@ -23,7 +23,9 @@ const Box = () => {
               .map((article) => (
                 <Article
                   category={article.categories[0].categoryName}
+                  category2 = {article?.categories[1]?.categoryName}
                 slugCategory = {article.categories[0].slug}
+                slugCategory2 = {article?.categories[1]?.slug}
                   key={article._id}
                   slug={article.slug}
                   title={article.articleTitle}

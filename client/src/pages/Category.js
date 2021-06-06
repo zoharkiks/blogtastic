@@ -11,7 +11,9 @@ const Category = () => {
   // Fetching category and category specific articles from store
   const selectedCategory = useSelector((state) => state.category);
   const articles = useSelector((state) => state.category.category.articles);
+
   const {loading,category} =  selectedCategory
+
 
 //   Getting category id
   const categoryId = useParams()
@@ -41,7 +43,7 @@ const Category = () => {
           {loading ? (
             ""
           ) : (
-            <h2 className="text-4xl p-2 font-bold text-[#24272B]  my-8 sm:text-3xl">{category.categoryName}</h2>
+            <h2 className="text-4xl p-2 font-bold text-[#24272B]  my-8 sm:text-3xl">Articles on {category.categoryName}</h2>
           )}
           <div className="grid gap-7 place-items-center md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-1">
             {loading ? (

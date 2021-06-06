@@ -35,6 +35,7 @@ const Article = () => {
   const articleId = useParams();
 
   const article = useSelector((state) => state.article);
+  
 
   const {
     articleTitle,
@@ -45,7 +46,9 @@ const Article = () => {
     shortDesc,
     author,
     categories,
-  } = article;
+  }  = article;
+
+console.log(categories &&  categories[1] ? categories[1].categoryName : null);
 
   useEffect(() => {
     if (articleId && articleId !== "") {
@@ -55,6 +58,9 @@ const Article = () => {
     dispatch(removeSelectedArticle());
   }, [articleId]);
 
+
+
+
   return (
     <div className="article text-[#24272B] bg-[#FAF2EA] font-montserrat  ">
       {loading ? (
@@ -62,7 +68,7 @@ const Article = () => {
           <MyLoader />
         </div>
       ) : (
-        <div className=" flex flex-col text-center items-center px-4 pb-4  ">
+        <div className=" flex flex-col text-center items-center px-4 pb-4  "> 
           <MenuBookIcon fontSize="large" className="mt-8" />
           <h1 className=" text-2xl  font-bold mt-2 sm:text-3xl sm:px-5">
             {articleTitle}
@@ -75,6 +81,15 @@ const Article = () => {
               # {categories ? categories[0].categoryName : null}
             </Link>{" "}
           </span>
+
+        {
+          categories &&  categories[1] ? <span className="bg-[#F26419] text-white font-semibold text-left rounded-[10px] mt-[8px]  max-h-8 w px-2 sm:text-xl ">
+          <Link to={`/categories/${categories ? categories[1].slug : null}`}>
+            # {categories ? categories[1].categoryName : null}
+          </Link>{" "}
+        </span> : ''
+        }
+
 
           <div className="h-[160px] w-full mt-4 ">
             <img
