@@ -35,7 +35,7 @@ const Article = ({
         /></Link>
         <span
           onClick={fetchCat}
-          className="bg-[#F26419] text-[#F1DAC4] font-semibold text-center rounded-[10px] my-[12px] h-6 w-28  sm:text-xl "
+          className="bg-[#F26419] text-[#F1DAC4] font-semibold text-left rounded-[10px] my-[12px] px-2 max-h-8 w-min  sm:text-xl "
         >
           <Link to={`/categories/${slugCategory}`}>#{category}</Link>
         </span>

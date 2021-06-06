@@ -36,14 +36,14 @@ const Category = () => {
 
   return (
     <div className="category">
-      <div className="bg-taupe font-montserrat ">
-        <div className="flex flex-col items-center px-8">
+      <div className="bg-[#F1DAC4]  font-montserrat ">
+        <div className="flex flex-col items-center pb-[18px] px-8">
           {loading ? (
             ""
           ) : (
-            <h2 className="text-2xl  my-8 sm:text-3xl">{category.categoryName}</h2>
+            <h2 className="text-4xl p-2 font-bold text-[#24272B]  my-8 sm:text-3xl">{category.categoryName}</h2>
           )}
-          <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-1">
+          <div className="grid gap-7 place-items-center md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-1">
             {loading ? (
               <MyLoader />
             ) : (
@@ -65,12 +65,13 @@ const Category = () => {
                   />
                 ))
             )}
+            
           </div>
           <span
-            className="cursor-pointer bg-white p-4 rounded-xl font-medium text-xl my-8 sm:text-2xl sm:p-4"
+            className="cursor-pointer bg-[#F26419] text-[#F1DAC4] mt-7 h-[43px] w-[138px] rounded-[20px] pt-[12px] text-center align-middle font-bold text-[20px] leading-[17px]"
             onClick={showMore}
           >
-            Show More Articles
+            Load More
           </span>
         </div>
       </div>
