@@ -26,16 +26,17 @@ import {
 } from "../redux/actions/articleActions";
 // Import loader
 import MyLoader from "../components/MyLoader";
+
 // Helper functions
 import { dateParser } from "../helpers/date.js";
 import firstLetter from "../helpers/firstLetter";
+import estimateTime from '../helpers/readingTime'
 const Article = () => {
   // Selected Article State
   const dispatch = useDispatch();
   const articleId = useParams();
 
   const article = useSelector((state) => state.article);
-  
 
   const {
     articleTitle,
@@ -48,7 +49,6 @@ const Article = () => {
     categories,
   }  = article;
 
-console.log(categories &&  categories[1] ? categories[1].categoryName : null);
 
   useEffect(() => {
     if (articleId && articleId !== "") {
@@ -57,7 +57,7 @@ console.log(categories &&  categories[1] ? categories[1].categoryName : null);
 
     dispatch(removeSelectedArticle());
   }, [articleId]);
-
+ 
 
 
 
@@ -89,6 +89,8 @@ console.log(categories &&  categories[1] ? categories[1].categoryName : null);
           </Link>{" "}
         </span> : ''
         }
+
+        <span className='text-lg mt-2'>{estimateTime(`${articleContent}`)} </span>
 
 
           <div className="h-[160px] w-full mt-4 ">
