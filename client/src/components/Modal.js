@@ -9,8 +9,8 @@ const Modal = () => {
       >
           <div className="flex flex-col px-4 pt-[44px] pb[182px]  ">
           <h1 className='text-[33px] leading-[41px] font-semibold '>Welcome to BlogTastic</h1>
-          <span className="bg-[#F26419] text-[#F1DAC4] mt-7 h-12 w-32 rounded-[20px] text-center py-[2px] font-bold text-[18px] leading-[22px] ">
-          <Link to={"/allArticles"}> Explore Articles</Link>
+          <span className="bg-[#F26419] text-[#F1DAC4] mt-7 h-14 w-32 rounded-[26px] text-center py-[6px] font-bold text-[18px] leading-[22px] ">
+          <Link to={"/allArticles"}>Start Exploring</Link>
           </span>
 
           </div>

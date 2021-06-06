@@ -18,9 +18,9 @@ const AllArticles = () => {
 
   return (
     <div className="allArticles">
-      <div className="bg-taupe font-montserrat ">
-        <div className="flex flex-col items-center px-8">
-          <h2 className='text-2xl  my-8 sm:text-3xl' >All Articles</h2>
+      <div className="bg-[#7699D4] font-montserrat ">
+        <div className="flex flex-col items-center pb-[18px] px-8">
+          <h2 className='text-4xl p-2 font-bold text-[#F1DAC4]  my-8 sm:text-3xl' >All Articles</h2>
           <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-1">
             {loading ? (<MyLoader/>) : (articles.slice(0, visible).map((article) => (
               <Article
@@ -37,10 +37,10 @@ const AllArticles = () => {
                 coverImg={`http://localhost:1337${article?.coverImage?.url}`}
               />
             ))) }
-            
+
           </div>
-          <span className="cursor-pointer bg-white p-4 rounded-xl font-medium text-xl my-8 sm:text-2xl sm:p-4" onClick={showMore}>
-          Show More Articles
+          <span className="cursor-pointer bg-[#F26419] text-[#F1DAC4] mt-7 h-[43px] w-[138px] rounded-[20px] pt-[12px] text-center align-middle font-bold text-[20px] leading-[17px]" onClick={showMore}>
+          Load More
         </span>
         </div>
       </div>
