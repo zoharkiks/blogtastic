@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     <div className="Navbar font-montserrat ">
       <div className="bg-[#24272B] flex justify-between items-center px-4 py-2 h-20 lg:px-7">
-        <h1 className="text-3xl text-[#F1DAC4] py-2 font-semibold sm:text-2xl ">
+        <h1 className="text-3xl text-[#F1DAC4] py-2 font-semibold sm:text-4xl ">
           {" "}
           <Link onClick={clear} to="/">
             Blogtastic
@@ -100,16 +100,16 @@ const Navbar = () => {
           <MenuIcon
             onClick={handleMenu}
             
-          className=" text-[#F1DAC4] !text-[45px] "
+          className=" text-[#F1DAC4] !text-[45px] sm:!text-[60px] "
           />
         </div>
       </div>
       {open ? (
         <div className="bg-[#7699D4] px-7 h-screen w-full  fixed top-0 z-10 lg:hidden ">
-          <div className="bg-[#9448BC] z-10 rounded-xl py-8 mt-5 w-full flex max-h-80 flex-col justify-start items-center pt-10 p-3 ">
+          <div className="bg-[#9448BC] z-10 rounded-xl py-8 mt-5 w-full flex h-72 flex-col justify-start items-center pt-10 p-3 sm: ">
             <CloseIcon
               onClick={handleMenu}
-              className="absolute top-6 right-8 text-[#F1DAC4] "
+              className="absolute top-6 right-8 text-[#F1DAC4] sm:!text-[2rem] "
             />
             <div className="relative ">
               <input
@@ -118,10 +118,10 @@ const Navbar = () => {
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
                 }}
-                className="bg-[#F26419] text-[#F1DAC4] placeholder-[#F1DAC4] h-9 font-medium rounded-3xl mb-10 pl-5 py-1 outline-none sm:py-3 sm:px-8 sm:rounded-3xl sm:text-lg"
+                className="bg-[#F26419] text-[#F1DAC4] placeholder-[#F1DAC4] h-9 font-medium rounded-3xl mb-10 pl-5 py-1 outline-none sm:w-80 sm:text-[20px] "
                 placeholder="Search..."
               />
-              <SearchIcon className="absolute right-2 top-1 text-white sm:top-4 sm:right-2" />
+              <SearchIcon className="absolute right-2 top-1 text-white sm:top-1.5 sm:right-2" />
             </div>
             {searchTerm && searchTerm.length >=2 ? (
               <div className='bg-[#F1DAC4] top-[6.5rem] min-h-[11rem] w-[19rem] absolute py-2 rounded-xl border-gray-200 max-h-[19rem] sm:w-[30rem]'>
@@ -161,14 +161,14 @@ const Navbar = () => {
               ""
             )}
 
-          <div className="flex flex-col text-[#F1DAC4] font-bold text-2xl items-center space-y-2 ">
-          <span className="sm:text-2xl" onClick={handleMenu}>
+          <div className="flex flex-col text-[#F1DAC4] font-bold text-2xl items-center space-y-2 sm:text-3xl ">
+          <span className="" onClick={handleMenu}>
               <Link to="/">Home</Link>
             </span>
-            <span className="sm:text-2xl" onClick={handleMenu}>
+            <span className="" onClick={handleMenu}>
               <Link to="/allArticles/"> All Articles</Link>
             </span>
-            <span className="sm:text-2xl" onClick={handleMenu}><Link to='/about-me'>About Me</Link></span>
+            <span className="" onClick={handleMenu}><Link to='/about-me'>About Me</Link></span>
           </div>
             
           </div>
