@@ -68,9 +68,9 @@ const Article = () => {
           <MyLoader />
         </div>
       ) : (
-        <div className=" flex flex-col text-center items-center px-4 pb-4  "> 
+        <div className=" flex flex-col text-center items-center px-4 pb-6  "> 
           <MenuBookIcon fontSize="large" className="mt-8" />
-          <h1 className=" text-2xl  font-bold mt-2 sm:text-3xl sm:px-5">
+          <h1 className=" text-2xl py-1  font-bold mt-2 sm:text-3xl sm:px-5">
             {articleTitle}
           </h1>
           <p className=" text-lg mt-2 min-w-40 sm:text-2xl">
@@ -93,9 +93,9 @@ const Article = () => {
         <span className='text-lg mt-2'>{estimateTime(`${articleContent}`)} </span>
 
 
-          <div className="h-[160px] w-full mt-4 ">
+          <div className="  w-full mt-4 ">
             <img
-              className="object-cover h-full w-full"
+              className="object-cover min-h-full max-h-[400px] w-full" 
               src={`http://192.168.29.80:1337${coverImage?.url}`}
               alt=""
             />

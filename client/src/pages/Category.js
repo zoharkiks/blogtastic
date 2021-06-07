@@ -39,13 +39,13 @@ const Category = () => {
   return (
     <div className="category">
       <div className="bg-[#F1DAC4]  font-montserrat ">
-        <div className="flex flex-col items-center pb-[18px] px-8">
+        <div className="flex flex-col justify-center items-center pb-[18px] px-8">
           {loading ? (
             ""
           ) : (
             <h2 className="text-4xl p-2 font-bold text-[#24272B]  my-8 sm:text-4xl">All Articles on {category.categoryName}</h2>
-          )}
-          <div className="grid gap-7 place-items-center md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-1">
+          )} 
+          <div className="grid gap-7  md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-1">
             {loading ? (
               <MyLoader />
             ) : (

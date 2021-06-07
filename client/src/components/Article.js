@@ -30,7 +30,7 @@ const Article = ({
 
   return (
     <div className="article">
-      <div className="bg-[#24272B] border-l-4 px-[15px] py-4 border-[#BA274A] flex flex-col w-full justify-center rounded-xl font-montserrat sm:space-y-5 ">
+      <div className="bg-[#24272B]  border-l-4 px-[15px] py-6 border-[#BA274A] flex flex-col justify-center rounded-xl font-montserrat sm:space-y-5 ">
         <div className="flex justify-center">
         <Link to={`/articles/${slug}`}>
           <img
@@ -57,7 +57,7 @@ const Article = ({
         ) : (
           ""
         )}
-        <h1 className="text-[#F1DAC4] font-bold text-2xl mb-2  sm:text-3xl">
+        <h1 className="text-[#F1DAC4] font-bold text-2xl mb-2 py-1  sm:text-3xl">
           {title}
         </h1>
         <span className="text-[#F1DAC4] font-bold text-[18px] mb-4 sm:text-xl  ">

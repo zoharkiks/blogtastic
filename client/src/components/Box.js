@@ -13,7 +13,7 @@ const Box = () => {
         <h1 className="text-2xl text-[#F1DAC4] font-bold sm:text-4xl ">
           Featured Articles
         </h1>
-        <div className=" grid gap-y-8 md:grid-cols-2 md:grid-rows-2 md:gap-y-10 xl:grid-cols-3 xl:grid-rows-1">
+        <div className=" grid gap-y-8 md:grid-cols-2 md:grid-rows-2 md:gap-y-10 md:gap-x-6 xl:grid-cols-3 xl:grid-rows-1">
           {loading ? (
             <MyLoader className="w-screen" />
           ) : (

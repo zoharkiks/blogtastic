@@ -70,10 +70,10 @@ const Footer = () => {
         </div>
         {/* ------------------------- */}
 
-        <span className="text-[#F1DAC4] font-bold text-lg   sm:text-xl">
+        <span className="text-[#F1DAC4] font-bold text-lg sm:text-xl">
           Sign Up for Awesome Newsletters
         </span>
-        <form action="" className="relative mt-2">
+        <form action="" className="relative mt-4">
           <input
             type="text"
             name=""

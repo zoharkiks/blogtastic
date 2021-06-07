@@ -161,7 +161,7 @@ const Navbar = () => {
               ""
             )}
 
-          <div className="flex flex-col text-[#F1DAC4] font-bold text-2xl items-center space-y-2 sm:text-3xl ">
+          <div className="flex flex-col text-[#F1DAC4] font-bold text-2xl items-center space-y-2 overflow-hidden sm:text-[1.65rem] ">
           <span className="" onClick={handleMenu}>
               <Link to="/">Home</Link>
             </span>
