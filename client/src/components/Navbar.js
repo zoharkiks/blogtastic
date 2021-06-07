@@ -147,7 +147,7 @@ const Navbar = () => {
                                 onClick={handleMenu}
                               >
                                 <h1>{article.articleTitle}</h1>
-                                <img className='rounded-full h-20 w-20' src={`http://localhost:1337${article?.coverImage?.url}`}/>
+                                <img className='rounded-full h-20 w-20' src={`http://192.168.29.80:1337${article?.coverImage?.url}`}/>
                                 
                               </div>
                             </Link>

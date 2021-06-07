@@ -96,7 +96,7 @@ const Article = () => {
           <div className="h-[160px] w-full mt-4 ">
             <img
               className="object-cover h-full w-full"
-              src={`http://localhost:1337${coverImage?.url}`}
+              src={`http://192.168.29.80:1337${coverImage?.url}`}
               alt=""
             />
           </div>
@@ -133,7 +133,7 @@ const Article = () => {
               <PinterestShareButton
                 url={`https://localhost:1337alllArticles/${articleId}`}
                 description={shortDesc}
-                media={`http://localhost:1337${coverImage?.url}`}
+                media={`http://192.168.29.80:1337/${coverImage?.url}`}
               >
                 <PinterestIcon className="sm:!text-4xl" />
               </PinterestShareButton>

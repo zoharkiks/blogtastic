@@ -25,7 +25,7 @@ export const removeSelectedArticle = ()=>{
       return(dispatch)=>{
         dispatch(seletcedArticleStart())
         axios
-        .get(`http://localhost:1337/articles/${slug}`)
+        .get(`http://192.168.29.80:1337/articles/${slug}`)
         .then((res) => {
           const data = res.data;
           dispatch(selectedArticle(data));

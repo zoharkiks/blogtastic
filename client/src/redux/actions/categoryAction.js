@@ -17,7 +17,7 @@ export const selectedCategory = (category) => {
     return(dispatch)=>{
       dispatch(selectedCategoryStart())
       axios
-      .get(`http://localhost:1337/categories/${slug}`)
+      .get(`http://192.168.29.80:1337/categories/${slug}`)
       .then((res) => {
         const data = res.data;
         dispatch(selectedCategory(data));

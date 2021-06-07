@@ -63,7 +63,7 @@ const Category = () => {
                     description={article.articleContent}
                     shortDesc={article.shortDesc}
                     author={article.author}
-                    coverImg={`http://localhost:1337${article?.coverImage?.url}`}
+                    coverImg={`http://192.168.29.80:1337${article?.coverImage?.url}`}
                   />
                 ))
             )}
