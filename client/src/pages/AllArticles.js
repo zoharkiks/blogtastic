@@ -18,7 +18,7 @@ const AllArticles = () => {
     <div className="allArticles">
       <div className="bg-[#7699D4] font-montserrat ">
         <div className="flex flex-col items-center pb-[18px] px-8">
-          <h2 className="text-4xl p-2 font-bold text-[#F1DAC4]  my-8 sm:text-3xl">
+          <h2 className="text-4xl p-2 font-bold text-[#F1DAC4]  my-8 sm:text-4xl">
             All Articles
           </h2>
           <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-1">
@@ -47,7 +47,7 @@ const AllArticles = () => {
             )}
           </div>
           <span
-            className="cursor-pointer bg-[#F26419] text-[#F1DAC4] mt-7 h-[43px] w-[138px] rounded-[20px] pt-[12px] text-center align-middle font-bold text-[20px] leading-[17px]"
+            className="cursor-pointer bg-[#F26419] text-[#F1DAC4] mt-7 h-[43px] w-[120px] rounded-[20px] pt-[12px] text-center align-middle font-bold text-[14px] leading-[17px] sm:w-[140px] sm:h-[50px] sm:text-[20px] sm:py-[16px]"
             onClick={showMore}
           >
             Load More
