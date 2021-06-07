@@ -46,16 +46,16 @@ const Navbar = () => {
             onChange={(e) => {
               setSearchTerm(e.target.value);
             }}
-            className="bg-gray-300 rounded-3xl pl-5 py-2 px-8 outline-none "
+            className="bg-[#7699D4] placeholder-white text-white font-medium rounded-3xl pl-5 py-2 px-8 outline-none "
             placeholder="Search..."
           />
           <SearchIcon className="absolute right-1 top-1 text-white sm:top-2 sm:right-2" />
         </div>
 
         {searchTerm && searchTerm.length >= 2 ?  (
-          <div className="bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 rounded-xl border-gray-200 absolute max-h-[20rem] w-1/2 top-[4rem] left-[9rem]  hidden lg:inline z-10 ">
-            <div className="flex flex-col justify-center items-center space-y-5 relative xl:space-y-2 ">
-              <span className="text-2xl mt-2 text-left w-full ml-20 text-white">
+          <div className="bg-[#355EA4] top-[4.5rem] left-[16rem] min-h-[11rem] w-[32rem] absolute py-4 rounded-xl border-gray-200 max-h-[19rem]  hidden lg:inline z-10 ">
+            <div className="flex flex-col justify-start items-center  space-y-3 relative ">
+              <span className="text-2xl mt-2 text-left ml-6 w-full text-white">
                 Your search results:
               </span>
               {articles
@@ -71,16 +71,18 @@ const Navbar = () => {
                 })
                 .map((article) => {
                   return (
-                    <div key={article._id} className="py-2">
-                      <Link to={`/articles/${article.slug}`} onClick={clear}>
-                        <div className="bg-illusion p-4 text-white rounded-full text-xl flex flex-col justify-center items-center text-center sm:text-2xl">
-                          <h1>{article.articleTitle}</h1>
-                          <span className="text-center font-light text-sm sm:text-lg ">
-                            by: {article.author}
-                          </span>
-                        </div>
-                      </Link>
-                    </div>
+                    <div className='w-full' key={article._id}>
+                            <Link to={`/articles/${article.slug}`}>
+                              <div
+                                className="border-b-2 border-white font-medium  py-4 space-y-2 text-white text-xl flex flex-col  justify-center items-center text-center sm:text-2xl"
+                                onClick={handleMenu}
+                              >
+                                <h1>{article.articleTitle}</h1>
+                                <img className='rounded-full h-24 w-24' src={`http://192.168.29.80:1337${article?.coverImage?.url}`}/>
+                                
+                              </div>
+                            </Link>
+                          </div>
                   );
                 })}
             </div>
@@ -89,10 +91,10 @@ const Navbar = () => {
           ""
         )}
 
-        <span className="text-xl text-white hidden lg:inline" onClick={clear}>
+        <span className="text-2xl font-bold text-[#F5DEC8] hidden lg:inline" onClick={clear}>
           <Link  to="/allArticles/"> All Articles</Link>
         </span>
-        <span className="text-xl text-white hidden lg:inline" onClick={clear}><Link to='/about-me'>About Me</Link></span>
+        <span className="text-2xl font-bold text-[#F5DEC8] hidden lg:inline" onClick={clear}><Link to='/about-me'>About Me</Link></span>
 
         {/* -----------------------MOBILE NAVIGATION-------------------- */}
 
@@ -143,7 +145,7 @@ const Navbar = () => {
                           <div className='w-full' key={article._id}>
                             <Link to={`/articles/${article.slug}`}>
                               <div
-                                className="border-b-2 border-[#24272B] font-medium p-2 space-y-2 text-[#24272B] text-xl flex flex-col  justify-center items-center text-center sm:text-2xl"
+                                className="border-b-2 border-[#24272B] font-medium p-2 space-y-2 text-[#24272B] text-xl flex flex-col w-full  justify-center items-center text-center sm:text-2xl"
                                 onClick={handleMenu}
                               >
                                 <h1>{article.articleTitle}</h1>

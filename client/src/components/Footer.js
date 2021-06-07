@@ -75,9 +75,9 @@ const Footer = () => {
         </span>
         <form action="" className="relative mt-4">
           <input
-            type="text"
+            type="email"
             name=""
-            className="bg-[#BA274A] text-[#F1DAC4] placeholder-[#F1DAC4] w-72  rounded-xl pl-4 py-1 outline-none sm:px-8 sm:py-2 lg:mb-0  "
+            className="bg-[#BA274A] text-[#F1DAC4] placeholder-[#F1DAC4] w-72 font-semibold rounded-xl pl-4 py-1 outline-none sm:px-8 sm:py-2 lg:mb-0  "
             placeholder="Your Email"
           />
           <button
