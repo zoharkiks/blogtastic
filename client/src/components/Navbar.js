@@ -53,7 +53,7 @@ const Navbar = () => {
         </div>
 
         {searchTerm && searchTerm.length >= 2 ?  (
-          <div className="bg-[#355EA4] top-[4.5rem] left-[16rem] min-h-[11rem] w-[32rem] absolute py-4 rounded-xl border-gray-200 max-h-[19rem]  hidden lg:inline z-10 ">
+          <div className="bg-[#355EA4] top-[4.5rem] left-[16rem] min-h-[11rem] w-[32rem] absolute py-4 rounded-xl border-gray-200 max-h-[19rem]  hidden lg:inline z-20 ">
             <div className="flex flex-col justify-start items-center  space-y-3 relative ">
               <span className="text-2xl mt-2 text-left ml-6 w-full text-white">
                 Your search results:
