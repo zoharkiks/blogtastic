@@ -45,11 +45,13 @@ const Category = () => {
           ) : (
             <h2 className="text-4xl p-2 font-bold text-[#24272B]  my-8 sm:text-4xl">All Articles on {category.categoryName}</h2>
           )} 
-          <div className="grid gap-7  md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-1">
             {loading ? (
-              <MyLoader />
+              <div className="flex justify-center  items-center mt-[4rem] ">
+              <MyLoader className=" w-full h-full  sm:w-[30rem] lg:w-[40rem]" />
+            </div>
             ) : (
-              articles
+              <div className="grid gap-7  md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-1">
+              {articles
                 ?.slice(0, visible).reverse()
                 ?.map((article) => (
                   <Article
@@ -65,10 +67,10 @@ const Category = () => {
                     author={article.author}
                     coverImg={`http://192.168.29.80:1337${article?.coverImage?.url}`}
                   />
-                ))
+                ))}
+                </div>
             )}
             
-          </div>
           <span
             className="cursor-pointer bg-[#F26419] text-[#F1DAC4] mt-7 h-[43px] w-[120px] rounded-[20px] pt-[12px] text-center align-middle font-bold text-[14px] leading-[17px] sm:w-[140px] sm:h-[50px] sm:text-[20px] sm:py-[16px]"
             onClick={showMore}

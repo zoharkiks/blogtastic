@@ -64,9 +64,9 @@ const Article = () => {
   return (
     <div className="article text-[#24272B] bg-[#FAF2EA] font-montserrat  ">
       {loading ? (
-        <div className="p-4">
-          <MyLoader />
-        </div>
+         <div className="flex justify-center  items-center mt-[2rem] ">
+         <MyLoader className=" px-8 w-full h-full  sm:w-[30rem] lg:w-[40rem]" />
+       </div>
       ) : (
         <div className=" flex flex-col text-center items-center px-4 pb-6  "> 
           <MenuBookIcon fontSize="large" className="mt-8 lg:!text-12" />
@@ -202,7 +202,7 @@ const Article = () => {
               </WhatsappShareButton>
             </div>
             {/* -------------- */}
-<p className="text-left text-lg leading-8 mt-8 whitespace-pre-line  sm:text-2xl sm:leading-[3rem] lg:pr-[96px]  ">
+<p className="text-left text-lg leading-8 mt-8 whitespace-pre-line pb-4  sm:text-2xl sm:leading-[3rem] lg:pr-[96px]  ">
             {articleContent}
           </p>
 </div>
