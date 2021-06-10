@@ -2,17 +2,48 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Article from "./Article";
 import MyLoader from "./MyLoader";
+// Framer Motion
+import { motion } from "framer-motion";
 
 const Box = () => {
+
+// Animation Variants
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 1.2,
+  },
+
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: "tween", duration: 0.5, when: "beforeChildren", staggerChildren:1 },
+  },
+};
+
+const headingVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 1.2,
+  },
+
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: "tween", duration:.5},
+  },
+};
+
+
   const articles = useSelector((state) => state.allArticles.articles);
   const loading = useSelector((state) => state.allArticles.loading);
 
   return (
     <div className="box font-montserrat">
-      <div className="bg-[#9448BC] px-4 pt-6 pb-[18px] flex flex-col justify-center items-center space-y-8">
-        <h1 className="text-2xl text-[#F1DAC4] p-2 font-bold sm:text-4xl ">
+      <div  className="bg-[#9448BC] px-4 pt-6 pb-[18px] flex flex-col justify-center items-center space-y-8">
+        <motion.h1 variants={headingVariants} initial='hidden' animate='visible'  className="text-2xl text-[#F1DAC4] p-2 font-bold sm:text-4xl ">
           Featured Articles
-        </h1>
+        </motion.h1>
         
           {loading ? (
             <div className="flex justify-center  items-center">

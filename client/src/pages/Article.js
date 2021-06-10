@@ -73,7 +73,7 @@ const Article = () => {
           <h1 className=" text-2xl py-1  font-bold mt-2 sm:text-3xl sm:px-5 lg:text-4xl">
             {articleTitle}
           </h1>
-          <p className=" text-lg mt-2 w-4/5 sm:text-2xl lg:my-3">
+          <p className=" italic text-lg mt-2 w-4/5 sm:text-2xl lg:my-3">
             {shortDesc}
           </p>
           <span className="bg-[#F26419] text-white font-semibold text-left rounded-[10px] mt-[12px]  max-h-8 w px-2 sm:text-xl lg:text-[1.5rem] lg:px-4">

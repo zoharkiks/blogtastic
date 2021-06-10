@@ -6,6 +6,23 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import EmailIcon from "@material-ui/icons/Email";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import ArrowUpwardRoundedIcon from "@material-ui/icons/ArrowUpwardRounded";
+// Framer Motion
+import { motion , AnimatePresence} from "framer-motion";
+
+
+// Animation Variants
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 1.2,
+  },
+
+  visible: {
+    opacity: 1,
+    scale: 100,
+    transition: { type: "tween", duration: .5, when: "beforeChildren", staggerChildren:.7 },
+  },
+};
 
 const Footer = () => {
   const [visible, setVisible] = useState(false);
@@ -87,16 +104,21 @@ const Footer = () => {
             Sign Up
           </button>
         </form>  
-        <div className="">
-        {visible ? (
+        <AnimatePresence>
+                 {visible  ?(
+        <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:.2}} >
+
           <ArrowUpwardRoundedIcon
             onClick={scrollToTop}
             className="cursor-pointer fixed rounded-full right-[20px] bottom-[30px] bg-[#F26419] border-2 border-[#F1DAC4] h-4 w-4 !text-[2.5rem] sm:!text-[3.5rem] "
           />
+        </motion.div>
+
         ) : (
           ""
         )}
-        </div>
+        </AnimatePresence>
+ 
         
       </div>
     </div>

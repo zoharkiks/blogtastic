@@ -1,18 +1,50 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {Blob1,Blob2} from './Blob'
+// Framer Motion
+import { motion } from "framer-motion";
+
+
+// Animation Variants
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 1.2,
+  },
+
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: "tween", duration: 0.5, when: "beforeChildren", staggerChildren:.7 },
+  },
+};
+
+const headingVariants={
+  hidden: {
+    opacity: 0,
+    x:-100,
+  },
+
+  visible: {
+    opacity: 1,
+    x:0,
+    transition: { type: "tween",duration:0.5}
+  },
+}
+
+
 const Modal = () => {
   return (
     <div className="callToAction">
-      <div
+      <motion.div variants={containerVariants} initial='hidden' animate='visible'
         className="bg-[#F1DAC4] h-[19.5rem] relative  font-montserrat sm:h-[22rem] lg:w-[100vw] "
       >
           <div className="flex flex-col px-4 pt-[44px] pb[182px] md:px-8  ">
-          <h1 className='text-[33px] z-[5] leading-[41px] font-semibold sm:py-4 sm:text-[42px] lg:text-[58px]'>Welcome to Blogtastic</h1>
-          <span className='text-2xl  w-64 mt-2 z-[5] sm:py-[.5rem] sm:text-[2rem] lg:text-[2.5rem] lg:w-[35rem]'> Your Home of Great Articles</span>
-          <span className="bg-[#F26419] text-[#F1DAC4] mt-5 h-14 w-32 rounded-[26px] text-center py-[6px] font-bold text-[18px] leading-[22px] lg:w-40 lg:text-[22px] ">
+          <motion.h1 variants={headingVariants} className='text-[33px] z-[5] leading-[41px] font-semibold sm:py-4 sm:text-[42px] lg:text-[58px]'>Welcome to Blogtastic</motion.h1>
+          <motion.span variants={headingVariants} className='text-2xl  w-64 mt-2 z-[5] sm:py-[.5rem] sm:text-[2rem] lg:text-[2.5rem] lg:w-[35rem]'> Your Home of Great Articles</motion.span>
+          <motion.span variants={headingVariants} className="bg-[#F26419] text-[#F1DAC4] mt-5 h-14 w-32 rounded-[26px] text-center py-[6px] font-bold text-[18px] leading-[22px] lg:w-40 lg:text-[22px] ">
           <Link to={"/allArticles"}>Start Exploring</Link>
-          </span>
+          </motion.span>
 
           </div>
 
@@ -24,7 +56,7 @@ const Modal = () => {
              <Blob2 className=''></Blob2>
              </div>
          
-      </div>
+      </motion.div>
       
     </div>
   );

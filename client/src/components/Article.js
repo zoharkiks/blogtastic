@@ -1,11 +1,12 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
 import { dateParser } from "../helpers/date.js";
-import firstLetter from "../helpers/firstLetter";
-import Avatar from "@material-ui/core/Avatar";
 import "../App.css";
 import { useDispatch } from "react-redux";
 import { fetchCategory } from "../redux/actions/categoryAction";
+
+
+
 
 const Article = ({
   title,
