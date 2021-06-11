@@ -23,7 +23,9 @@ const Navbar = () => {
 
   // Expanding on mobile
   const [open, setOpen] = useState(false);
+  // Search Terms
   const [searchTerm, setSearchTerm] = useState("");
+  const [noResults, setNoResults] = useState(true);
 
   const handleMenu = () => {
     setOpen(!open);
@@ -73,7 +75,26 @@ const Navbar = () => {
       y: 0,
       transition: { type: "tween", duration: 0.5 },
     },
+
+    searchResultsHidden: {
+      opacity: 0,
+      x: -1000,
+      transition: { type: "tween", duration: 0.5 },
+    },
+
+    searchResultsVisible: {
+      opacity: 1,
+      x: 1,
+      transition: { type: "tween", duration: 0.5 },
+    },
+
+    searchResultsExit: {
+      opacity: 0,
+      transition: { type: "tween", duration: 0.5 },
+    },
   };
+
+
 
   return (
     <div className="Navbar font-montserrat ">
@@ -105,48 +126,54 @@ const Navbar = () => {
           />
           <SearchIcon className="absolute right-1 top-1 text-white sm:top-2 sm:right-2" />
         </div>
-
-        {searchTerm && searchTerm.length >= 2 ? (
-          <div className="bg-[#355EA4] top-[4.5rem] left-[16rem] min-h-[11rem] w-[32rem] absolute py-4 rounded-xl border-gray-200 max-h-[19rem]  hidden lg:inline z-20 ">
-            <div className="flex flex-col justify-start items-center  space-y-3 relative ">
-              <span className="text-2xl mt-2 text-left ml-6 w-full text-white">
-                Your search results:
-              </span>
-              {articles
-                .filter((article) => {
-                  const title = article.articleTitle.toLowerCase();
-                  const term = searchTerm.toLowerCase();
-                  if (searchTerm === "") {
-                    return null;
-                  } else if (title.includes(term) && term.length >= 2) {
-                    return article;
-                  }
-                  return false;
-                })
-                .map((article) => {
-                  return (
-                    <div className="w-full" key={article._id}>
-                      <Link to={`/articles/${article.slug}`}>
-                        <div
-                          className="border-b-2 border-white font-medium  py-4 space-y-2 text-white text-xl flex flex-col  justify-center items-center text-center sm:text-2xl"
-                          onClick={handleMenu}
-                        >
-                          <h1>{article.articleTitle}</h1>
-                          <img
-                            className="rounded-full h-24 w-24"
-                            src={`http://192.168.29.80:1337${article?.coverImage?.url}`}
-                          />
-                        </div>
-                      </Link>
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
-
+        <AnimatePresence>
+          {searchTerm && searchTerm.length >= 2 ? (
+            <motion.div
+              variants={searchVariants}
+              initial="searchResultsHidden"
+              animate="searchResultsVisible"
+              exit="searchResultsExit"
+              className="bg-[#355EA4] top-[4.5rem] left-[16rem] min-h-[11rem] w-[32rem] absolute py-4 rounded-xl border-gray-200 max-h-[19rem]  hidden lg:inline z-20 "
+            >
+              <div className="flex flex-col justify-start items-center  space-y-3 relative ">
+                <span className="text-2xl mt-2 text-left ml-6 w-full text-white">
+                  Your search results:
+                </span>
+                {articles
+                  .filter((article) => {
+                    const title = article.articleTitle.toLowerCase();
+                    const term = searchTerm.toLowerCase();
+                    if (searchTerm === "") {
+                      return null;
+                    } else if (title.includes(term) && term.length >= 2) {
+                      return article;
+                    }
+                    return false;
+                  })
+                  .map((article) => {
+                    return (
+                      <div className="w-full" key={article._id}>
+                        <Link to={`/articles/${article.slug}`}>
+                          <div
+                            className="border-b-2 border-white font-medium  py-4 space-y-2 text-white text-xl flex flex-col  justify-center items-center text-center sm:text-2xl"
+                            onClick={handleMenu}
+                          >
+                            <h1>{article.articleTitle}</h1>
+                            <img
+                              className="rounded-full h-24 w-24"
+                              src={`http://192.168.29.80:1337${article?.coverImage?.url}`}
+                            />
+                          </div>
+                        </Link>
+                      </div>
+                    );
+                  })}
+              </div>
+            </motion.div>
+          ) : (
+            ""
+          )}
+        </AnimatePresence>
         <motion.span
           variants={headingVariants}
           className="text-2xl font-bold text-[#F5DEC8] hidden lg:inline"
@@ -197,45 +224,57 @@ const Navbar = () => {
                 />
                 <SearchIcon className="absolute right-2 top-1 text-white sm:top-1.5 sm:right-2" />
               </div>
-              {searchTerm && searchTerm.length >= 2 ? (
-                <div className="bg-[#F1DAC4] top-[6.5rem] min-h-[11rem] w-[19rem] absolute py-2 rounded-xl border-gray-200 max-h-[19rem] sm:w-[30rem]">
-                  <div className="flex flex-col justify-start items-center  space-y-3">
-                    <div className="flex flex-col justify-center items-center space-y-5 relative ">
-                      {articles
-                        .filter((article) => {
-                          const title = article.articleTitle.toLowerCase();
-                          const term = searchTerm.toLowerCase();
-                          if (searchTerm === "") {
-                            return null;
-                          } else if (title.includes(term) && term.length >= 2) {
-                            return article;
-                          }
-                          return false;
-                        })
-                        .map((article) => {
-                          return (
-                            <div className="w-full" key={article._id}>
-                              <Link to={`/articles/${article.slug}`}>
-                                <div
-                                  className="border-b-2 border-[#24272B] font-medium p-2 space-y-2 text-[#24272B] text-xl flex flex-col w-full  justify-center items-center text-center sm:text-2xl"
-                                  onClick={handleMenu}
-                                >
-                                  <h1>{article.articleTitle}</h1>
-                                  <img
-                                    className="rounded-full h-20 w-20"
-                                    src={`http://192.168.29.80:1337${article?.coverImage?.url}`}
-                                  />
-                                </div>
-                              </Link>
-                            </div>
-                          );
-                        })}
+              <AnimatePresence>
+                {searchTerm && searchTerm.length >= 2 ? (
+                  <motion.div
+                    variants={searchVariants}
+                    initial="searchResultsHidden"
+                    animate="searchResultsVisible"
+                    exit="searchResultsExit"
+                    className="bg-[#F1DAC4] top-[6.5rem] min-h-[11rem] w-[19rem] absolute py-2 rounded-xl border-gray-200 max-h-[19rem] sm:w-[30rem]"
+                  >
+                    <div className="flex flex-col justify-start items-center  space-y-3">
+                      <div className="flex flex-col justify-center items-center space-y-5 relative ">
+                        {articles
+                          .filter((article) => {
+                            const title = article.articleTitle.toLowerCase();
+                            const term = searchTerm.toLowerCase();
+                            if (searchTerm === "") {
+                              return null;
+                            } else if (
+                              title.includes(term) &&
+                              term.length >= 2
+                            ) {
+                              
+                              return article;
+                            }
+                            return false;
+                          })
+                          .map((article) => {
+                            return (
+                              <div className="w-full" key={article._id}>
+                                <Link to={`/articles/${article.slug}`}>
+                                  <div
+                                    className="border-b-2 border-[#24272B] font-medium p-2 space-y-2 text-[#24272B] text-xl flex flex-col w-full  justify-center items-center text-center sm:text-2xl"
+                                    onClick={handleMenu}
+                                  >
+                                    <h1>{article.articleTitle}</h1>
+                                    <img
+                                      className="rounded-full h-20 w-20"
+                                      src={`http://192.168.29.80:1337${article?.coverImage?.url}`}
+                                    />
+                                  </div>
+                                </Link>
+                              </div>
+                            );
+                          })}
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ) : (
-                ""
-              )}
+                  </motion.div>
+                ) : (
+                  ""
+                )}
+              </AnimatePresence>
 
               <div className="flex flex-col text-[#F1DAC4] font-bold text-2xl items-center space-y-2 overflow-hidden sm:text-[1.65rem] ">
                 <span className="" onClick={handleMenu}>

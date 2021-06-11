@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import Article from "../components/Article";
 import MyLoader from "../components/MyLoader";
 
+// Framer Motion
+import { motion, AnimatePresence } from "framer-motion";
+
 const AllArticles = () => {
   // Fetching articles from store
   const articles = useSelector((state) => state.allArticles.articles);
@@ -14,10 +17,36 @@ const AllArticles = () => {
     setVisible((prevValue) => prevValue + 3);
   };
 
+  // Animation Variants
+  const containerVariants = {
+    hidden: {
+      opacity: 0,
+      x: '-100vw',
+    },
+
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "tween",
+        ease:'easeInOut',
+        duration: 0.5,
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+
+
+
+
   return (
     <div className="allArticles">
       <div className="bg-[#7699D4] font-montserrat ">
-        <div className="flex flex-col items-center pb-[18px] px-8">
+        <motion.div variants={containerVariants}
+        initial="hidden"
+        animate="visible"  className="flex flex-col items-center pb-[18px] px-8">
           <h2 className="text-4xl p-2 font-bold text-[#F1DAC4]  my-8 sm:text-4xl">
             All Articles
           </h2>
@@ -56,7 +85,7 @@ const AllArticles = () => {
           >
             Load More
           </span>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

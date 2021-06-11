@@ -41,7 +41,7 @@ const headingVariants = {
   return (
     <div className="box font-montserrat">
       <div  className="bg-[#9448BC] px-4 pt-6 pb-[18px] flex flex-col justify-center items-center space-y-8">
-        <motion.h1 variants={headingVariants} initial='hidden' animate='visible'  className="text-2xl text-[#F1DAC4] p-2 font-bold sm:text-4xl ">
+        <motion.h1 variants={headingVariants} initial='hidden' animate='visible'  className="text-3xl text-[#F1DAC4] p-2 font-bold sm:text-4xl ">
           Featured Articles
         </motion.h1>
         

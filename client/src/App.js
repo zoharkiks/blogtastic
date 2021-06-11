@@ -17,6 +17,8 @@ import ScrollToTop from "./helpers/ScrollToTop";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "./redux/actions/dataActions";
 
+
+
 function App() {
   // Getting all the articles
   const dispatch = useDispatch();
@@ -27,7 +29,6 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
         <Navbar />
         <ScrollToTop/>
           <Switch>
@@ -47,7 +48,6 @@ function App() {
           </Switch>
         
         <Footer />
-      </BrowserRouter>
     </div>
   );
 }

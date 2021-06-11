@@ -46,6 +46,7 @@ const Footer = () => {
       top: 0,
       behavior: "smooth",
     });
+    window.navigator.vibrate(200);
   };
 
   useEffect(() => { 
@@ -110,7 +111,7 @@ const Footer = () => {
 
           <ArrowUpwardRoundedIcon
             onClick={scrollToTop}
-            className="cursor-pointer fixed rounded-full right-[20px] bottom-[30px] bg-[#F26419] border-2 border-[#F1DAC4] h-4 w-4 !text-[2.5rem] sm:!text-[3.5rem] "
+            className="cursor-pointer fixed rounded-full right-[20px] bottom-[30px] bg-[#F26419] border-2 border-[#F1DAC4] h-4 w-4 !text-[3rem] sm:!text-[4rem] "
           />
         </motion.div>
 
