@@ -1,10 +1,10 @@
 module.exports = {
-  mode:"jit",
+  mode: "jit",
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      'montserrat': ["Montserrat", "sans-serif"],
+      montserrat: ["Montserrat", "sans-serif"],
     },
     extend: {
       colors: {
@@ -17,5 +17,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

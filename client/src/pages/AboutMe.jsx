@@ -15,7 +15,7 @@ import { motion, AnimatePresence } from "framer-motion";
       duration: 0.5,
       when: "beforeChildren",
       staggerChildren: .5,
-      delayChildren:.5
+      delayChildren:.5,
     },
   },
 
@@ -33,7 +33,8 @@ const headingVariants = {
 
     transition: {
       type: "tween",  
-      duration: 0.8,
+      ease:'easeIn',
+      duration: 0.7,
     },
   },
 };

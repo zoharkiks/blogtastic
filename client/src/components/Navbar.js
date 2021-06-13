@@ -25,12 +25,18 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   // Search Terms
   const [searchTerm, setSearchTerm] = useState("");
-  const [noResults, setNoResults] = useState(true);
 
   const handleMenu = () => {
     setOpen(!open);
     clear();
   };
+
+   // Filter Articles
+  const filteredArticles = articles.filter((article) =>
+    article.articleTitle.toLocaleLowerCase().includes(searchTerm)
+  );
+
+  const articlesToDisplay = searchTerm ? filteredArticles : articles;
 
   // Animation Variants
   const containerVariants = {
@@ -95,7 +101,6 @@ const Navbar = () => {
   };
 
 
-
   return (
     <div className="Navbar font-montserrat ">
       <motion.div
@@ -139,35 +144,30 @@ const Navbar = () => {
                 <span className="text-2xl mt-2 text-left ml-6 w-full text-white">
                   Your search results:
                 </span>
-                {articles
-                  .filter((article) => {
-                    const title = article.articleTitle.toLowerCase();
-                    const term = searchTerm.toLowerCase();
-                    if (searchTerm === "") {
-                      return null;
-                    } else if (title.includes(term) && term.length >= 2) {
-                      return article;
-                    }
-                    return false;
-                  })
-                  .map((article) => {
-                    return (
-                      <div className="w-full" key={article._id}>
-                        <Link to={`/articles/${article.slug}`}>
-                          <div
-                            className="border-b-2 border-white font-medium  py-4 space-y-2 text-white text-xl flex flex-col  justify-center items-center text-center sm:text-2xl"
-                            onClick={handleMenu}
-                          >
-                            <h1>{article.articleTitle}</h1>
-                            <img
-                              className="rounded-full h-24 w-24"
-                              src={`http://192.168.29.80:1337${article?.coverImage?.url}`}
-                            />
+                {!filteredArticles.length && (
+                          <div className='px-4 text-white'>
+                           Shoot!!! We still don't have that, please adjust your search
+                            criteria.
                           </div>
-                        </Link>
-                      </div>
-                    );
-                  })}
+                        )}
+                        {articlesToDisplay.map((article) => {
+                          return (
+                            <div className="w-full" key={article._id}>
+                              <Link to={`/articles/${article.slug}`}>
+                                <div
+                                  className="border-b-2 border-[white] font-medium p-2 space-y-2 text-[white] text-xl flex flex-col w-full  justify-center items-center text-center sm:text-2xl"
+                                  onClick={handleMenu}
+                                >
+                                  <h1>{article.articleTitle}</h1>
+                                  <img
+                                    className="rounded-full h-20 w-20"
+                                    src={`http://192.168.29.80:1337${article?.coverImage?.url}`}
+                                  />
+                                </div>
+                              </Link>
+                            </div>
+                          );
+                        })}
               </div>
             </motion.div>
           ) : (
@@ -235,39 +235,30 @@ const Navbar = () => {
                   >
                     <div className="flex flex-col justify-start items-center  space-y-3">
                       <div className="flex flex-col justify-center items-center space-y-5 relative ">
-                        {articles
-                          .filter((article) => {
-                            const title = article.articleTitle.toLowerCase();
-                            const term = searchTerm.toLowerCase();
-                            if (searchTerm === "") {
-                              return null;
-                            } else if (
-                              title.includes(term) &&
-                              term.length >= 2
-                            ) {
-                              
-                              return article;
-                            }
-                            return false;
-                          })
-                          .map((article) => {
-                            return (
-                              <div className="w-full" key={article._id}>
-                                <Link to={`/articles/${article.slug}`}>
-                                  <div
-                                    className="border-b-2 border-[#24272B] font-medium p-2 space-y-2 text-[#24272B] text-xl flex flex-col w-full  justify-center items-center text-center sm:text-2xl"
-                                    onClick={handleMenu}
-                                  >
-                                    <h1>{article.articleTitle}</h1>
-                                    <img
-                                      className="rounded-full h-20 w-20"
-                                      src={`http://192.168.29.80:1337${article?.coverImage?.url}`}
-                                    />
-                                  </div>
-                                </Link>
-                              </div>
-                            );
-                          })}
+                        {!filteredArticles.length && (
+                          <div className='flex justify-center items-center px-8'>
+                            <span>Shoot!!! We still don't have that, please adjust your search
+                            criteria.</span> 
+                          </div>
+                        )}
+                        {articlesToDisplay.map((article) => (
+                        
+                            <div className="w-full" key={article._id}>
+                              <Link to={`/articles/${article.slug}`}>
+                                <div
+                                  className="border-b-2 border-[#24272B] font-medium p-2 space-y-2 text-[#24272B] text-xl flex flex-col w-full  justify-center items-center text-center sm:text-2xl"
+                                  onClick={handleMenu}
+                                >
+                                  <h1>{article.articleTitle}</h1>
+                                  <img
+                                    className="rounded-full h-20 w-20"
+                                    src={`http://192.168.29.80:1337${article?.coverImage?.url}`}
+                                  />
+                                </div>
+                              </Link>
+                            </div>
+                          
+                ))}
                       </div>
                     </div>
                   </motion.div>

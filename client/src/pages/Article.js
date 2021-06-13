@@ -34,6 +34,9 @@ import estimateTime from "../helpers/readingTime";
 // Framer Motion
 import { motion } from "framer-motion";
 
+import parse from 'html-react-parser';
+
+
 const Article = () => {
   // Animation Variants
   const containerVariants = {
@@ -63,9 +66,8 @@ const Article = () => {
       transition: {
         type: "tween",
         when: "beforeChildren",
-        staggerChildren: 0.5,
-        duration: 0.8,
-        delayChildren: 0.2,
+        staggerChildren: 0.4,
+        duration: .3,
       },
     },
   };
@@ -218,7 +220,7 @@ const Article = () => {
 
             <motion.div variants={headingVariants} className="lg:flex">
               {/* Share Icons */}
-              <div className="hidden flex-col items-center lg:flex w-[26rem] space-y-4 ml-[140px] mr-[38px] ">
+              <div className="hidden flex-col items-center lg:flex px-12 w-[45rem] space-y-4 ml-[140px] mr-[38px] ">
                 <span className="font-bold  text-3xl mb-6  ">
                   {dateParser(`${updatedAt}`)}
                 </span>
@@ -261,9 +263,11 @@ const Article = () => {
                 </WhatsappShareButton>
               </div>
               {/* -------------- */}
-              <p className="text-left text-lg leading-8 mt-8 whitespace-pre-line pb-4  sm:text-2xl sm:leading-[3rem] lg:pr-[96px]  ">
-                {articleContent}
-              </p>
+              
+              <div className='prose text-left text-lg px-2 prose leading-8 mt-8  pb-4  sm:text-2xl sm:leading-[3rem] lg:pr-[96px]'>
+              {parse(`${articleContent}`)}
+
+              </div>
             </motion.div>
           </motion.div>
 

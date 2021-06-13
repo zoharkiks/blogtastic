@@ -11,6 +11,7 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "@tinymce/tinymce-react": "^3.12.6",
     "strapi": "3.6.2",
     "strapi-admin": "3.6.2",
     "strapi-connector-mongoose": "3.6.2",
