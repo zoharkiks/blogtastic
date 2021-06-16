@@ -12,17 +12,17 @@
   "devDependencies": {},
   "dependencies": {
     "@tinymce/tinymce-react": "^3.12.6",
-    "strapi": "3.6.2",
-    "strapi-admin": "3.6.2",
-    "strapi-connector-mongoose": "3.6.2",
-    "strapi-plugin-content-manager": "3.6.2",
-    "strapi-plugin-content-type-builder": "3.6.2",
-    "strapi-plugin-email": "3.6.2",
-    "strapi-plugin-i18n": "3.6.2",
-    "strapi-plugin-upload": "3.6.2",
-    "strapi-plugin-users-permissions": "3.6.2",
-    "strapi-provider-upload-cloudinary": "^3.6.2",
-    "strapi-utils": "3.6.2"
+    "strapi": "3.6.3",
+    "strapi-admin": "3.6.3",
+    "strapi-connector-mongoose": "3.6.3",
+    "strapi-plugin-content-manager": "3.6.3",
+    "strapi-plugin-content-type-builder": "3.6.3",
+    "strapi-plugin-email": "3.6.3",
+    "strapi-plugin-i18n": "3.6.3",
+    "strapi-plugin-upload": "3.6.3",
+    "strapi-plugin-users-permissions": "3.6.3",
+    "strapi-provider-upload-cloudinary": "^3.6.3",
+    "strapi-utils": "3.6.3"
   },
   "author": {
     "name": "A Strapi developer"

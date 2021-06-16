@@ -7,3 +7,21 @@ box-sizing: border-box;
 overflow-x:hidden
 }
 
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.959);
+    border-radius: 20px;
+    border: transparent;
+}

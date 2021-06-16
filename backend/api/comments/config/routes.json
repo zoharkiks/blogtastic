@@ -2,52 +2,51 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/articles",
-      "handler": "articles.find",
+      "path": "/comments",
+      "handler": "comments.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/articles/count",
-      "handler": "articles.count",
+      "path": "/comments/count",
+      "handler": "comments.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/articles/:slug",
-      "handler": "articles.findOne",
+      "path": "/comments/:id",
+      "handler": "comments.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/articles",
-      "handler": "articles.create",
+      "path": "/comments",
+      "handler": "comments.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/articles/:id",
-      "handler": "articles.update",
+      "path": "/comments/:id",
+      "handler": "comments.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/articles/:id",
-      "handler": "articles.delete",
+      "path": "/comments/:id",
+      "handler": "comments.delete",
       "config": {
         "policies": []
       }
     }
-  
   ]
 }

@@ -10,7 +10,6 @@
     "timestamps": true,
     "draftAndPublish": true
   },
-  "pluginOptions": {},
   "attributes": {
     "categoryName": {
       "type": "string",

@@ -1,4 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
+// Import Components
+import Comments from '../components/Comments.jsx'
 // Import Icons
 import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -33,7 +36,6 @@ import firstLetter from "../helpers/firstLetter";
 import estimateTime from "../helpers/readingTime";
 // Framer Motion
 import { motion } from "framer-motion";
-
 import parse from 'html-react-parser';
 
 
@@ -76,8 +78,9 @@ const Article = () => {
   // Selected Article State
   const dispatch = useDispatch();
   const articleId = useParams();
-
   const article = useSelector((state) => state.article);
+
+  // Comments Related State and Functions
 
   const {
     articleTitle,
@@ -88,15 +91,22 @@ const Article = () => {
     shortDesc,
     author,
     categories,
+
   } = article;
 
-  useEffect(() => {
+
+
+
+  useEffect(() => { 
+    
     if (articleId && articleId !== "") {
       dispatch(fetchArticle(articleId.id));
     }
 
-    dispatch(removeSelectedArticle());
+    dispatch(removeSelectedArticle());    
+
   }, [articleId]);
+
 
   return (
     <motion.div
@@ -110,6 +120,7 @@ const Article = () => {
           <MyLoader className=" px-8 w-full h-full  sm:w-[30rem] lg:w-[40rem]" />
         </div>
       ) : (
+        <div>
         <div className=" flex flex-col text-center items-center px-4 pb-6  ">
           <motion.div
             className=" flex flex-col text-center items-center"
@@ -272,8 +283,16 @@ const Article = () => {
           </motion.div>
 
           <span className="border-b-2 border-[#24272B] w-full"></span>
+
         </div>
-      )}
+       <Comments/>
+
+        </div>
+     )
+     
+     
+     }
+
     </motion.div>
   );
 };

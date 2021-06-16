@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "articles",
   "info": {
-    "name": "Articles",
+    "name": "articles",
     "description": ""
   },
   "options": {
@@ -10,7 +10,6 @@
     "timestamps": true,
     "draftAndPublish": true
   },
-  "pluginOptions": {},
   "attributes": {
     "articleTitle": {
       "type": "string",
@@ -60,6 +59,9 @@
     "slug": {
       "type": "uid",
       "targetField": "articleTitle"
+    },
+    "comments": {
+      "collection": "comments"
     }
   }
 }
