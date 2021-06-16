@@ -5,6 +5,6 @@ return moment(new Date(date)).format('DD MMMM YYYY')
 }
 
 export const commentDate = (date)=>{
-    return moment(new Date(date)).startOf('hour').fromNow()
+    return moment(new Date(date)).fromNow()
 
 }
