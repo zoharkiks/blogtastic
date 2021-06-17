@@ -8,8 +8,16 @@ import axios from "axios";
 // Import Icons
 import CloseIcon from "@material-ui/icons/Close";
 
+// Import Loader
+import ClipLoader from "react-spinners/ClipLoader";
+
+// Import Helper
+import {clearInput} from '../helpers/clearInput'
+
 const Comments = () => {
   // States
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false)
   const [loginVisible, setLoginVisible] = useState(false);
   const [registerVisible, setRegisterVisible] = useState(false);
   const [login, setLogin] = useState(false);
@@ -37,6 +45,7 @@ const Comments = () => {
         setComments(data);
       });
   };
+
   // JWT Check
   const tokenCheck = () => {
     localStorage.getItem("token") ? setLogin(true) : setLogin(false);
@@ -48,81 +57,111 @@ const Comments = () => {
   }, []);
 
   // Submit Comment
-  const submitComment = () => {
-    fetch("http://192.168.29.80:1337/comments", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({
-        content,
-
-        article: articleId,
-      }),
-    }).then(() =>
-      fetch(
-        `http://192.168.29.80:1337/comments?article=${articleId}&_sort=updatedAt:DESC`
+  const submitComment = async () => {
+    setLoading(true);
+    await axios
+      .post(
+        "http://192.168.29.80:1337/comments",
+        {
+          content,
+          article: articleId,
+        },
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       )
-        .then((res) => res.json())
-        .then((val) => setComments(val))
-    );
-    Array.from(document.querySelectorAll("input")).forEach(
-      (input) => (input.value = "")
-    );
+      .then(() =>
+        fetch(
+          `http://192.168.29.80:1337/comments?article=${articleId}&_sort=updatedAt:DESC`
+        )
+          .then((res) => res.json())
+          .then((val) => setComments(val))
+      );
+
+    clearInput()
     setContent("");
+    setLoading(false);
   };
 
   //  Log In
   const viewLogin = () => {
     setLoginVisible(!loginVisible);
+    setError(false)
+
   };
+
   const handleLogin = async () => {
-    await fetch("http://192.168.29.80:1337/auth/local", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
+    setLoading(true);
+    await axios
+      .post("http://192.168.29.80:1337/auth/local", {
         password: password,
         identifier: username || email,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => localStorage.setItem("token", res.jwt));
+      })
+      .then((res) => {
+        localStorage.setItem("token", res.data.jwt);
+        localStorage.setItem("user", res.data.user.username);
+        setError(false)
+      }).catch(err =>{
+        if(err.response){
+          setError(true)
+          clearInput()
+        }
+      })
+
     tokenCheck();
+    setLoading(false);
+
   };
 
   // LogOut
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     tokenCheck();
     setLoginVisible(false);
+    
   };
 
   // SignUp
   const viewSignUp = () => {
     setRegisterVisible(!registerVisible);
+    setError(false)
   };
 
-const handleRegister = async ()=>{
-  await fetch("http://localhost:1337/auth/local/register", {
-                method: "post",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    password: password,
-                    email,
-                    username: username
-                })
-            }).then((res) => res.json())
-                .then(res => localStorage.setItem("token", res.jwt))
+  const handleRegister = async () => {
+    setLoading(true);
+    await axios
+    .post(
+      "http://192.168.29.80:1337/auth/local/register",
+      {
+        password: password,
+        email,
+        username: username
+      },
+      {
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    ).then((res) => {
+      localStorage.setItem("token", res.data.jwt);
+      localStorage.setItem("user", res.data.user.username);
+    })
+    .catch(err =>{
+      console.log(err.response);
+      if(err.response){
+        setError(true)
+        clearInput()
+      }
+    })
     tokenCheck();
-}
+    setLoading(false);
+  };
 
-
-
+  // ************************************** //
   return (
     <div className="comments font-montserrat relative">
       <div className="flex flex-col px-4 pb-6 font-bold text-xl mt-1">
@@ -136,7 +175,7 @@ const handleRegister = async ()=>{
               </span>{" "}
               {loginVisible ? (
                 <div className="bg-clip-padding backdrop-filter backdrop-blur-[4px] bg-opacity-[25%] border border-gray-200 bg-white h-full flex flex-col w-full justify-center  items-center fixed top-0 left-0 z-[1]">
-                  <div className="bg-[#F26419] rounded-[10px]  w-[254px] h-[324px] relative z-[1] flex flex-col  items-center">
+                  <div className="bg-[#F26419] rounded-[10px]  w-[280px] h-[324px] relative z-[1] flex flex-col  items-center">
                     <CloseIcon
                       onClick={viewLogin}
                       className="absolute top-2 right-[10px] text-[#F1DAC4] sm:!text-[2rem] "
@@ -156,12 +195,22 @@ const handleRegister = async ()=>{
                       type="password"
                       className="h-[39px] w-[217px] my-6 bg-[#BA274A] placeholder-white rounded-[10px] px-3 font-bold text-[16px] "
                     ></input>
+                    
                     <button
                       onClick={handleLogin}
                       className="bg-white text-black w-[100px]  h-[40px] rounded-[10px] font-bold text-lg"
                     >
-                      Log In
+                      {!loading ? (
+                        "Log In"
+                      ) : (
+                        <ClipLoader
+                          color={"#fffff"}
+                          loading={loading}
+                          size={25}
+                        />
+                      )}
                     </button>
+                    {error?<span className="text-lg mt-2">Please re-check the details</span> : ""}
                   </div>
                 </div>
               ) : (
@@ -173,7 +222,7 @@ const handleRegister = async ()=>{
               </span>{" "}
               {registerVisible ? (
                 <div className="bg-clip-padding backdrop-filter backdrop-blur-[4px] bg-opacity-[25%] border border-gray-200 bg-white h-full flex flex-col w-full justify-center  items-center fixed top-0 left-0 z-[1]">
-                  <div className="bg-[#F26419] rounded-[10px]  w-[254px] h-[360px] relative z-[1] flex flex-col  items-center">
+                  <div className="bg-[#F26419] rounded-[10px]  w-[280px] h-[360px] relative z-[1] flex flex-col  items-center">
                     <CloseIcon
                       onClick={viewSignUp}
                       className="absolute top-2 right-[10px] text-[#F1DAC4] sm:!text-[2rem] "
@@ -205,8 +254,17 @@ const handleRegister = async ()=>{
                       onClick={handleRegister}
                       className="bg-white text-black w-[100px]  h-[40px] rounded-[10px] font-bold text-lg"
                     >
-                      Sign Up
+                      {!loading ? (
+                        "Sign Up"
+                      ) : (
+                        <ClipLoader
+                          color={"#fffff"}
+                          loading={loading}
+                          size={25}
+                        />
+                      )}
                     </button>
+                    {error?<span className="text-lg mt-2">Please re-check the details</span> : ""}
                   </div>
                 </div>
               ) : (
@@ -218,8 +276,9 @@ const handleRegister = async ()=>{
         ) : (
           <div className="bg-[#BA274A] rounded-[10px] px-6 py-[18px] flex flex-col mt-5">
             <h2 className="font-bold text-[16px] text-white">
-              What Are You Thinking?
+              {`What's on your mind, ${localStorage.getItem("user")}?`}
             </h2>
+
             <input
               onChange={(e) => setContent(e.target.value)}
               placeholder="Type Here..."
@@ -229,9 +288,16 @@ const handleRegister = async ()=>{
             <div className="flex justify-between">
               <button
                 onClick={submitComment}
-                className="bg-white w-[100px] h-[40px] mx-auto rounded-[10px] font-bold text-xl"
+                disabled={content.length < 2}
+                className={`${
+                  content.length < 2 ? "bg-gray-700" : ""
+                } bg-white w-[100px] h-[40px] mx-auto rounded-[10px] font-bold text-xl`}
               >
-                Post
+                {!loading ? (
+                  "Post"
+                ) : (
+                  <ClipLoader color={"#fffff"} loading={loading} size={25} />
+                )}
               </button>
 
               <button
@@ -246,20 +312,33 @@ const handleRegister = async ()=>{
 
         <span className="border-b-2 mx-auto border-[#24272B] w-1/2 mt-5"></span>
       </div>
-      {comments.slice(0, page).map((comment) => (
-        <CommentCard
-          key={comment.id}
-          content={comment.content}
-          date={comment.createdAt}
-          author={comment.author.username}
-        />
-      ))}
-      <button
-        onClick={showMore}
-        className="bg-[#F26419] text-white w-[160px] h-[40px] mx-4 mb-4 rounded-[10px] font-bold text-[16px]"
-      >
-        More Comments
-      </button>
+      {comments.length > 0 ? (
+        <>
+          {" "}
+          {comments.slice(0, page).map((comment) => (
+            <CommentCard
+              key={comment.id}
+              content={comment.content}
+              date={comment.createdAt}
+              author={comment.author.username}
+            />
+          ))}
+          {comments.length > 5 ? (
+            <button
+              onClick={showMore}
+              className="bg-[#F26419] text-white w-[160px] h-[40px] mx-4 mb-4 rounded-[10px] font-bold text-[16px]"
+            >
+              More Comments
+            </button>
+          ) : (
+            ""
+          )}
+        </>
+      ) : (
+        <span className="px-6 my-4 font-bold text-xl">
+          Be the first to comment
+        </span>
+      )}
     </div>
   );
 };

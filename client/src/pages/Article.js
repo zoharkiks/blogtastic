@@ -113,15 +113,15 @@ const Article = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="article text-[#24272B] bg-[#FAF2EA] font-montserrat  "
+      className="article text-[#24272B] bg-[#FAF2EA] font-montserrat pb-4  "
     >
       {loading ? (
         <div className="flex justify-center  items-center mt-[2rem] ">
-          <MyLoader className=" px-8 w-full h-full  sm:w-[30rem] lg:w-[40rem]" />
+          <MyLoader className=" px-8  w-full h-full  sm:w-[30rem] lg:w-[40rem]" />
         </div>
       ) : (
         <div>
-        <div className=" flex flex-col text-center items-center px-4 pb-6  ">
+        <div className=" flex flex-col text-center items-center px-4   ">
           <motion.div
             className=" flex flex-col text-center items-center"
             variants={headingVariants}

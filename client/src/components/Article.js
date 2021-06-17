@@ -35,7 +35,7 @@ const Article = ({
         <div className="flex justify-center">
         <Link to={`/articles/${slug}`}>
           <img
-            className="object-scale-down h-48   sm:h-56 rounded-lg"
+            className="object-cover h-48  w-full sm:h-56 rounded-lg"
             src={coverImg}
             alt=""
           />
