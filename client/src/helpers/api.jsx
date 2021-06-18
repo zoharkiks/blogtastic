@@ -4,7 +4,7 @@ import axios from "axios";
 export const fetchComments = async (id, setComments) => {
   await axios
     .get(
-      `http://192.168.29.80:1337/comments?article=${id}&_sort=updatedAt:DESC`
+      `https://blog-zohar.herokuapp.com/comments?article=${id}&_sort=updatedAt:DESC`
     )
     .then((res) => {
       const data = res.data;
@@ -24,7 +24,7 @@ export const submitComment = async (
   setLoading(true);
   await axios
     .post(
-      "http://192.168.29.80:1337/comments",
+      "https://blog-zohar.herokuapp.com/comments",
       {
         content,
         article: articleId,
@@ -38,7 +38,7 @@ export const submitComment = async (
     )
     .then(() =>
       fetch(
-        `http://192.168.29.80:1337/comments?article=${articleId}&_sort=updatedAt:DESC`
+        `https://blog-zohar.herokuapp.com/comments?article=${articleId}&_sort=updatedAt:DESC`
       )
         .then((res) => res.json())
         .then((val) => setComments(val))
@@ -61,7 +61,7 @@ export const handleLogin = async (
 ) => {
   setLoading(true);
   await axios
-    .post("http://192.168.29.80:1337/auth/local", {
+    .post("https://blog-zohar.herokuapp.com/auth/local", {
       password: password,
       identifier: username || email,
     })
@@ -94,7 +94,7 @@ export const handleRegister = async (
   setLoading(true);
   await axios
     .post(
-      "http://192.168.29.80:1337/auth/local/register",
+      "https://blog-zohar.herokuapp.com/auth/local/register",
       {
         password: password,
         email,

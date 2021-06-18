@@ -89,9 +89,9 @@ const Footer = () => {
         {/* ------------------------- */}
 
         <span className="text-[#F1DAC4] font-bold text-lg sm:text-xl">
-          Sign Up for Awesome Newsletters
+          Made with ❤️ and lots of ☕
         </span>
-        <form action="" className="relative mt-4 lg:mt-0">
+        {/* <form action="" className="relative mt-4 lg:mt-0">
           <input
             type="email"
             name=""
@@ -104,7 +104,7 @@ const Footer = () => {
           >
             Sign Up
           </button>
-        </form>  
+        </form>   */}
         <AnimatePresence>
                  {visible  ?(
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:.2}} >

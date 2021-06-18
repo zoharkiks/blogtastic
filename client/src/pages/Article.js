@@ -158,11 +158,11 @@ const Article = () => {
             </span>
             <motion.div
               variants={headingVariants}
-              className="  w-full mt-4 md:px-[5rem] lg:px-[7rem] "
+              className="   mt-4 md:px-[5rem] lg:px-[7rem] "
             >
               <img
-                className="object-cover min-h-full max-h-[400px] w-full"
-                src={`http://192.168.29.80:1337${coverImage?.url}`}
+                classame="object-cover min-h-full max-h-[400px] min-w-[75%]"
+                src={coverImage?.url}
                 alt=""
               />
             </motion.div>
@@ -231,7 +231,7 @@ const Article = () => {
 
             <motion.div variants={headingVariants} className="lg:flex">
               {/* Share Icons */}
-              <div className="hidden flex-col items-center lg:flex px-12 w-[45rem] space-y-4 ml-[140px] mr-[38px] ">
+              <div className="hidden flex-col items-center lg:flex px-12  space-y-4 ml-[140px] mr-[38px] ">
                 <span className="font-bold  text-3xl mb-6  ">
                   {dateParser(`${updatedAt}`)}
                 </span>
@@ -282,8 +282,8 @@ const Article = () => {
             </motion.div>
           </motion.div>
 
-          <span className="border-b border-[#24272B] w-full mb-4"></span>
-          <span className="border-b border-[#24272B] w-full mb-4"></span>
+          <span className="border-b border-gray-300 w-full mb-4"></span>
+          <span className="border-b border-gray-300 w-full mb-4"></span>
 
         </div>
        <Comments/>

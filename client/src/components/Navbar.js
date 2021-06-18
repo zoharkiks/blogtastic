@@ -7,7 +7,7 @@ import SearchIcon from "@material-ui/icons/Search";
 // Redux
 import { useSelector } from "react-redux";
 // Framer Motion
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence} from "framer-motion";
 
 const Navbar = () => {
   // Access State
@@ -161,7 +161,7 @@ const Navbar = () => {
                                   <h1>{article.articleTitle}</h1>
                                   <img
                                     className="rounded-full h-20 w-20"
-                                    src={`http://192.168.29.80:1337${article?.coverImage?.url}`}
+                                    src={article?.coverImage?.url}
                                   />
                                 </div>
                               </Link>
@@ -252,7 +252,7 @@ const Navbar = () => {
                                   <h1>{article.articleTitle}</h1>
                                   <img
                                     className="rounded-full h-20 w-20"
-                                    src={`http://192.168.29.80:1337${article?.coverImage?.url}`}
+                                    src={article?.coverImage?.url }
                                   />
                                 </div>
                               </Link>

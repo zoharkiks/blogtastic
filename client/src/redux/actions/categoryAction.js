@@ -17,7 +17,7 @@ export const selectedCategory = (category) => {
     return(dispatch)=>{
       dispatch(selectedCategoryStart())
       axios
-      .get(`http://192.168.29.80:1337/categories/${slug}`)
+      .get(`https://blog-zohar.herokuapp.com/categories/${slug}`)
       .then((res) => {
         const data = res.data;
         dispatch(selectedCategory(data));

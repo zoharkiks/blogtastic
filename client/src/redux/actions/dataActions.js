@@ -20,7 +20,7 @@ export const fetchData = () => {
   return (dispatch) => {
     dispatch(setArticlesStart())
        axios
-      .get(`http://192.168.29.80:1337/articles?_sort=updatedAt:DESC`)
+      .get(`https://blog-zohar.herokuapp.com/articles?_sort=updatedAt:DESC`)
       .then((res) => {
         const data = res.data;
         dispatch(setArticles(data));

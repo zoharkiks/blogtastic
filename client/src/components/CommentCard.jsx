@@ -21,12 +21,12 @@ function CommentCard({author,content,date}) {
             <p className="font-light text-lg mt-2 sm:text-xl lg:text-2xl">
             <ShowMoreText
                 /* Default options */
-                lines={6}
+                lines={5}
                 more='Show more'
                 less='Show less'
                 anchorClass='text-[#F26419] font-medium'
                 expanded={false}
-                // width={`100%`}
+                width={320}
             >
           {content}
           </ShowMoreText>
