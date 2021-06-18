@@ -282,7 +282,8 @@ const Article = () => {
             </motion.div>
           </motion.div>
 
-          <span className="border-b-2 border-[#24272B] w-full"></span>
+          <span className="border-b border-[#24272B] w-full mb-4"></span>
+          <span className="border-b border-[#24272B] w-full mb-4"></span>
 
         </div>
        <Comments/>

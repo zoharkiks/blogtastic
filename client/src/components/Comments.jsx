@@ -12,12 +12,14 @@ import CloseIcon from "@material-ui/icons/Close";
 import ClipLoader from "react-spinners/ClipLoader";
 
 // Import Helper
-import {clearInput} from '../helpers/clearInput'
+import { clearComment, clearInput } from "../helpers/clearInput";
+import { fetchComments, handleLogin, handleRegister, submitComment } from "../helpers/api";
+
 
 const Comments = () => {
   // States
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
   const [loginVisible, setLoginVisible] = useState(false);
   const [registerVisible, setRegisterVisible] = useState(false);
   const [login, setLogin] = useState(false);
@@ -35,85 +37,21 @@ const Comments = () => {
 
   // Fetching Articles
   const articleId = useSelector((state) => state.article._id);
-  const fetchComments = async (id) => {
-    await axios
-      .get(
-        `http://192.168.29.80:1337/comments?article=${id}&_sort=updatedAt:DESC`
-      )
-      .then((res) => {
-        const data = res.data;
-        setComments(data);
-      });
-  };
+  useEffect(() => {
+    tokenCheck();
+    fetchComments(articleId,setComments);
+  }, []);
 
   // JWT Check
   const tokenCheck = () => {
     localStorage.getItem("token") ? setLogin(true) : setLogin(false);
   };
 
-  useEffect(() => {
-    tokenCheck();
-    fetchComments(articleId);
-  }, []);
-
-  // Submit Comment
-  const submitComment = async () => {
-    setLoading(true);
-    await axios
-      .post(
-        "http://192.168.29.80:1337/comments",
-        {
-          content,
-          article: articleId,
-        },
-        {
-          headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then(() =>
-        fetch(
-          `http://192.168.29.80:1337/comments?article=${articleId}&_sort=updatedAt:DESC`
-        )
-          .then((res) => res.json())
-          .then((val) => setComments(val))
-      );
-
-    clearInput()
-    setContent("");
-    setLoading(false);
-  };
-
+ 
   //  Log In
   const viewLogin = () => {
     setLoginVisible(!loginVisible);
-    setError(false)
-
-  };
-
-  const handleLogin = async () => {
-    setLoading(true);
-    await axios
-      .post("http://192.168.29.80:1337/auth/local", {
-        password: password,
-        identifier: username || email,
-      })
-      .then((res) => {
-        localStorage.setItem("token", res.data.jwt);
-        localStorage.setItem("user", res.data.user.username);
-        setError(false)
-      }).catch(err =>{
-        if(err.response){
-          setError(true)
-          clearInput()
-        }
-      })
-
-    tokenCheck();
-    setLoading(false);
-
+    setError(false);
   };
 
   // LogOut
@@ -122,137 +60,127 @@ const Comments = () => {
     localStorage.removeItem("user");
     tokenCheck();
     setLoginVisible(false);
-    
   };
 
   // SignUp
   const viewSignUp = () => {
     setRegisterVisible(!registerVisible);
-    setError(false)
+    setError(false);
   };
 
-  const handleRegister = async () => {
-    setLoading(true);
-    await axios
-    .post(
-      "http://192.168.29.80:1337/auth/local/register",
-      {
-        password: password,
-        email,
-        username: username
-      },
-      {
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    ).then((res) => {
-      localStorage.setItem("token", res.data.jwt);
-      localStorage.setItem("user", res.data.user.username);
-    })
-    .catch(err =>{
-      console.log(err.response);
-      if(err.response){
-        setError(true)
-        clearInput()
-      }
-    })
-    tokenCheck();
-    setLoading(false);
-  };
 
   // ************************************** //
   return (
     <div className="comments font-montserrat relative">
-      <div className="flex flex-col px-4 pb-6 font-bold text-xl mt-1">
-        <h1>Share Your Thoughts</h1>
+      <div className="flex flex-col px-4 pb-6 font-bold text-xl mt-1 sm:pl-[50px] sm:pr-[30px]  lg:pl-[170px] lg:pr-[60px]">
+        <h1 className="sm:text-2xl p-[2px] lg:text-4xl lg:font-bold ">
+          Share Your Thoughts
+        </h1>
         {!login ? (
-          <div className="bg-[#BA274A] px-4 py-3  rounded-[10px] mt-5">
-            <span className="font-medium text-white ">
+          <div className="bg-[#BA274A] px-4 py-3 min-w-content mr-auto  rounded-[10px] mt-5 sm:h-[6rem] sm:py-7 lg:mx-0 lg:mb-[64px]">
+            <span className="font-medium text-white sm:my-auto lg:text-[28px] lg:font-bold">
               Please{" "}
-              <span className="text-[#F26419]" onClick={viewLogin}>
+              <span className="text-[#F26419] cursor-pointer" onClick={viewLogin}>
                 Log In
               </span>{" "}
               {loginVisible ? (
                 <div className="bg-clip-padding backdrop-filter backdrop-blur-[4px] bg-opacity-[25%] border border-gray-200 bg-white h-full flex flex-col w-full justify-center  items-center fixed top-0 left-0 z-[1]">
-                  <div className="bg-[#F26419] rounded-[10px]  w-[280px] h-[324px] relative z-[1] flex flex-col  items-center">
+                  <div
+                    
+                    className="bg-[#F26419] rounded-[10px]  w-[280px] h-[340px] relative z-[1]  sm:w-[340px] sm:h-[400px] lg:w-[80%] lg:grid lg:grid-cols-2"
+                  >
                     <CloseIcon
                       onClick={viewLogin}
                       className="absolute top-2 right-[10px] text-[#F1DAC4] sm:!text-[2rem] "
                     />
-                    <h2 className="font-bold text-2xl mt-7 mb-9">
-                      Please Login
-                    </h2>
-                    <input
-                      onChange={(e) => setUsername(e.target.value)}
-                      placeholder="Username/Email"
-                      type="text"
-                      className="h-[39px] w-[217px] bg-[#BA274A] placeholder-white rounded-[10px] px-3 font-bold text-[16px] "
-                    ></input>
-                    <input
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Password"
-                      type="password"
-                      className="h-[39px] w-[217px] my-6 bg-[#BA274A] placeholder-white rounded-[10px] px-3 font-bold text-[16px] "
-                    ></input>
-                    
-                    <button
-                      onClick={handleLogin}
-                      className="bg-white text-black w-[100px]  h-[40px] rounded-[10px] font-bold text-lg"
-                    >
-                      {!loading ? (
-                        "Log In"
+                    <div className="flex flex-col  items-center">
+                      <h2 className="font-bold text-2xl p-[2px]  mt-7 mb-9 sm:text-[28px] lg:text-4xl">
+                        Please Login
+                      </h2>
+                      <input
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Username/Email"
+                        type="text"
+                        className="h-[39px] w-[217px] bg-[#BA274A] placeholder-white rounded-[10px] px-3 font-bold text-[16px] sm:h-[50px] sm:text-lg "
+                      ></input>
+                      <input
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        type="password"
+                        className="h-[39px] w-[217px] my-6 bg-[#BA274A] placeholder-white rounded-[10px] px-3 font-bold text-[16px] sm:h-[50px] sm:text-lg "
+                      ></input>
+
+                      <button
+                        onClick={()=>handleLogin(setLoading,password,username,email,setError,clearInput,tokenCheck)}
+                        className="bg-white text-black w-[100px]  h-[40px] rounded-[10px] font-bold text-lg sm:w-[110px]  sm:h-[50px] sm:text-[20px]"
+                      >
+                        {!loading ? (
+                          "Log In"
+                        ) : (
+                          <ClipLoader
+                            color={"#fffff"}
+                            loading={loading}
+                            size={25}
+                          />
+                        )}
+                      </button>
+                      {error ? (
+                        <span className="text-lg mt-2 sm:text-xl sm:mt-4">
+                          Please re-check the details
+                        </span>
                       ) : (
-                        <ClipLoader
-                          color={"#fffff"}
-                          loading={loading}
-                          size={25}
-                        />
+                        ""
                       )}
-                    </button>
-                    {error?<span className="text-lg mt-2">Please re-check the details</span> : ""}
+                    </div>
+                    <div className="hidden lg:flex flex-col justify-center items-center italic p-8 ">
+                      <span className='font-bold text-4xl p-4'>
+                        “The creative adult is the child who survived.” -Dieter
+                        F. Uchtdorf
+                      </span>
+                    </div>
                   </div>
                 </div>
               ) : (
                 ""
               )}
               Or{" "}
-              <span className="text-[#F26419]" onClick={viewSignUp}>
+              <span className="text-[#F26419] cursor-pointer " onClick={viewSignUp}>
                 Sign Up
               </span>{" "}
               {registerVisible ? (
                 <div className="bg-clip-padding backdrop-filter backdrop-blur-[4px] bg-opacity-[25%] border border-gray-200 bg-white h-full flex flex-col w-full justify-center  items-center fixed top-0 left-0 z-[1]">
-                  <div className="bg-[#F26419] rounded-[10px]  w-[280px] h-[360px] relative z-[1] flex flex-col  items-center">
+                  <div className="bg-[#F26419] rounded-[10px]  w-[280px] h-[360px] relative z-[1] flex flex-col  items-center sm:w-[340px] sm:h-[430px] lg:w-[80%] lg:grid lg:grid-cols-2">
                     <CloseIcon
                       onClick={viewSignUp}
                       className="absolute top-2 right-[10px] text-[#F1DAC4] sm:!text-[2rem] "
                     />
-                    <h2 className="font-bold text-2xl mt-7 mb-9">
+                    <div className='flex flex-col  items-center'>
+                    <h2 className="font-bold p-[2px] text-2xl mt-7 mb-9 sm:text-[28px] lg:text-4xl">
                       Please Sign Up
                     </h2>
                     <input
                       onChange={(e) => setUsername(e.target.value)}
                       placeholder="Username"
                       type="text"
-                      className="h-[39px] w-[217px] bg-[#BA274A] placeholder-white rounded-[10px] px-3 font-bold text-[16px] "
+                      className="h-[39px] w-[217px] bg-[#BA274A] placeholder-white rounded-[10px] px-3 font-bold text-[16px]  sm:h-[50px] sm:text-lg "
                     ></input>
                     <input
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Password"
                       type="password"
-                      className="h-[39px] w-[217px] my-4 bg-[#BA274A] placeholder-white rounded-[10px] px-3 font-bold text-[16px] "
+                      className="h-[39px] w-[217px] my-4 bg-[#BA274A] placeholder-white rounded-[10px] px-3 font-bold text-[16px]  sm:h-[50px] sm:text-lg "
                     ></input>
 
                     <input
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Email"
                       type="email"
-                      className="h-[39px] w-[217px] mb-6 bg-[#BA274A] placeholder-white rounded-[10px] px-3 font-bold text-[16px] "
+                      className="h-[39px] w-[217px] mb-6 bg-[#BA274A] placeholder-white rounded-[10px] px-3 font-bold text-[16px]  sm:h-[50px] sm:text-lg "
                     ></input>
 
                     <button
-                      onClick={handleRegister}
-                      className="bg-white text-black w-[100px]  h-[40px] rounded-[10px] font-bold text-lg"
+                      onClick={()=> handleRegister(setLoading, password,email,username,setError,clearInput,tokenCheck)}
+                      className="bg-white text-black w-[100px]  h-[40px] rounded-[10px] font-bold text-lg sm:w-[110px]  sm:h-[50px] sm:text-[20px]"
                     >
                       {!loading ? (
                         "Sign Up"
@@ -264,7 +192,20 @@ const Comments = () => {
                         />
                       )}
                     </button>
-                    {error?<span className="text-lg mt-2">Please re-check the details</span> : ""}
+                    {error ? (
+                      <span className="text-lg mt-2 sm:text-xl sm:mt-4">
+                        Please re-check the details
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                    
+                  </div>
+                  <div className="hidden lg:flex flex-col justify-center items-center italic p-8 ">
+                      <span className='font-bold text-4xl p-4'>
+                      "You can't use up creativity. The more you use the more you have." -- Maya Angelou
+                      </span>
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -275,19 +216,19 @@ const Comments = () => {
           </div>
         ) : (
           <div className="bg-[#BA274A] rounded-[10px] px-6 py-[18px] flex flex-col mt-5">
-            <h2 className="font-bold text-[16px] text-white">
+            <h2 className="font-bold text-[16px] text-white sm:text-xl">
               {`What's on your mind, ${localStorage.getItem("user")}?`}
             </h2>
 
-            <input
+            <textarea
               onChange={(e) => setContent(e.target.value)}
               placeholder="Type Here..."
               type="text"
-              className="h-[98px] placeholder-black rounded-[10px] pt-2 pb-[70px] px-3 font-bold text-[16px] my-4"
-            ></input>
+              className="h-[98px] break-words placeholder-black rounded-[10px] pt-2 px-3 font-bold text-[16px] my-4 sm:text-xl"
+            ></textarea>
             <div className="flex justify-between">
               <button
-                onClick={submitComment}
+                onClick={()=>submitComment(setLoading,content,articleId,setComments,clearComment,setContent)}
                 disabled={content.length < 2}
                 className={`${
                   content.length < 2 ? "bg-gray-700" : ""
@@ -309,8 +250,6 @@ const Comments = () => {
             </div>
           </div>
         )}
-
-        <span className="border-b-2 mx-auto border-[#24272B] w-1/2 mt-5"></span>
       </div>
       {comments.length > 0 ? (
         <>
@@ -326,7 +265,7 @@ const Comments = () => {
           {comments.length > 5 ? (
             <button
               onClick={showMore}
-              className="bg-[#F26419] text-white w-[160px] h-[40px] mx-4 mb-4 rounded-[10px] font-bold text-[16px]"
+              className="bg-[#F26419] text-white w-[160px] h-[40px] mx-4 my-4 rounded-[10px] font-bold text-[16px] sm:ml-[50px] sm:w-[180px] sm:h-[50px] lg:ml-[170px] lg:h-[65px] lg:w-[200px] lg:text-[20px]"
             >
               More Comments
             </button>

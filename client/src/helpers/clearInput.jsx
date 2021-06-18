@@ -3,3 +3,9 @@ export const clearInput = () =>{
         (input) => (input.value = "")
       );
 }
+
+export const clearComment = () =>{
+  Array.from(document.querySelectorAll("textarea")).forEach(
+      (textarea) => (textarea.value = "")
+    );
+}
